@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'spinner.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,12 +22,32 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
+  /*
+  List<Color> colors = [
+    Colors.red,
+    Colors.green,
+    Colors.indigo,
+    Colors.pinkAccent,
+    Colors.blue
+  ];
+*/
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('NOCONTEXTSPORT'),
       ),
+      /*
+      body: Container(
+        child: Center(
+          child: ColorLoader3(
+            radius: 30.0,
+            dotRadius: 5.0,
+          ),
+        ),
+      )
+      */
       body: Center(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
