@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'spinner.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,15 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  /*
-  List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.indigo,
-    Colors.pinkAccent,
-    Colors.blue
-  ];
-*/
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -38,16 +29,7 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('NOCONTEXTSPORT'),
       ),
-      /*
-      body: Container(
-        child: Center(
-          child: ColorLoader3(
-            radius: 30.0,
-            dotRadius: 5.0,
-          ),
-        ),
-      )
-      */
+
       body: Center(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,25 +50,28 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class SubPage extends StatelessWidget {
+class SubPage extends StatelessWidget with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Center(
-        child:Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('This is a subpage'),
-          /*  RaisedButton(
-              textColor: Colors.white,
-              color: Colors.redAccent,
-              child:Text('Back to Main Page'),
-              onPressed: () {
-          //      Navigator.pop(context);
-              }
-            )*/
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height,
+            child: Image.asset("assets/floor.jpg",
+            fit: BoxFit.fill,),
+          ),
+          Center(
+            child: Container(
+              child: RotationTransition(
+                turns: Tween(
+                  
+                ),
+                child: Image.asset("assets/bottle.jpg"),
+                width: 250, height: 250,),
+              ),
+          ),
+        ],
       ),
     );
   }
