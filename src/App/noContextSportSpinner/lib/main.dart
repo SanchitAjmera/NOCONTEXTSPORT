@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -49,62 +50,145 @@ class MainPage extends StatelessWidget {
     );
   }
 }
-
+/*
 class SubPage extends StatelessWidget with TickerProviderStateMixin{
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset("assets/floor.jpg",
-            fit: BoxFit.fill,),
-          ),
-          Center(
-            child: Container(
-              child: RotationTransition(
-                turns: Tween(
-                  
-                ),
-                child: Image.asset("assets/bottle.jpg"),
-                width: 250, height: 250,),
-              ),
-          ),
-        ],
-      ),
-    );
+   Animation _animation;
+   AnimationController _animationController;
+   var rng = new Random();
+   Tween _tween;
+
+   double randomNumber() {
+     return rng.nextDouble();
+   }
+
+   @override
+   SubPage() {
+     // TODO: implement initState
+     super.initState();
+     _animationController =
+         AnimationController(vsync: this, duration: Duration(seconds: 3));
+     _tween = new Tween<double>(
+         begin: rng.nextInt(3).toDouble(), end: rng.nextInt(3).toDouble());
+
+     _animationController.forward();
+   }
+
+   @override
+   Widget build(BuildContext context) {
+     return Scaffold(
+         body: Stack(
+       children: <Widget>[
+         Container(
+           height: MediaQuery.of(context).size.height,
+           child: Image.asset(
+             "assets/floor.jpg",
+             fit: BoxFit.fill,
+           ),
+         ),
+         Center(
+           child: Container(
+             child: RotationTransition(
+                 turns: Tween(begin: 0.0, end: randomNumber()).animate(
+                     new CurvedAnimation(
+                         parent: _animationController, curve: Curves.linear)),
+                 child: GestureDetector(
+                     onTap: () {
+                       setState(() {
+                         _animationController = AnimationController(
+                             vsync: this, duration: Duration(seconds: 3));
+                         _tween = new Tween<double>(
+                             begin: rng.nextInt(3).toDouble(),
+                             end: rng.nextInt(3).toDouble());
+
+                         _animationController.forward();
+                       });
+                     },
+                     child: Image.asset(
+                       "assets/bottle.png",
+                       height: 250,
+                       width: 250,
+                     ))),
+           ),
+         ),
+       ],
+     )
+   );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+*/
+class HomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  Animation _animation;
+  AnimationController _animationController;
+  var lastPosition = 0.0;
+  var rng = new Random();
+  Tween _tween;
+
+  double randomNumber() {
+    lastPosition =  rng.nextDouble();
+    return lastPosition;
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _tween = new Tween<double>(
+        begin: rng.nextInt(3).toDouble(), end: rng.nextInt(3).toDouble());
+
+    _animationController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-      ),
-    );
+        body: Stack(
+      children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.height,
+          child: Image.asset(
+            "assets/floor.jpg",
+            fit: BoxFit.fill,
+          ),
+        ),
+        Center(
+          child: Container(
+            child: RotationTransition(
+                turns: Tween(begin: lastPosition, end: randomNumber()).animate(
+                    new CurvedAnimation(
+                        parent: _animationController, curve: Curves.linear)),
+                child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _animationController = AnimationController(
+                            vsync: this, duration: Duration(seconds: 3));
+                        _tween = new Tween<double>(
+                            begin: rng.nextInt(3).toDouble(),
+                            end: rng.nextInt(3).toDouble());
+
+                        _animationController.forward();
+                      });
+                    },
+                    child: Image.asset(
+                      "assets/bottle.jpg",
+                      height: 250,
+                      width: 250,
+                    ))),
+          ),
+        ),
+      ],
+    ));
   }
 }
 
-
 Future navigateToSubPage(context) async {
   Navigator.push(context, MaterialPageRoute(builder: (context) =>
-  SubPage()));
+  HomePage()));
 }
