@@ -20,6 +20,7 @@ class BoardView extends StatefulWidget {
 }
 
 class _BoardViewState extends State<BoardView> {
+  // this is the radius of the cards and the smoothness of the circle
   Size get size => Size(MediaQuery.of(context).size.width * 0.8,
       MediaQuery.of(context).size.width * 0.8);
 
@@ -87,8 +88,11 @@ class _BoardViewState extends State<BoardView> {
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints:
-              BoxConstraints.expand(height: size.height / 3, width: 44),
-          child: Image.asset(luck.asset),
+              BoxConstraints.expand(height: size.height / 3, width: 100.0),
+          child: new Text(luck.asset,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold, height : 2.0),
+          ),// Image.asset(luck.asset),
         ),
       ),
     );
