@@ -46,8 +46,10 @@ class _HomePageState extends State<HomePage>
     _ani = CurvedAnimation(parent: _ctrl, curve: Curves.fastLinearToSlowEaseIn);
 
 //    this._items = [];
+    int accent = 0;
     for (String name in names){
-      _items.add(Luck(name, Colors.accents[0]));
+      _items.add(Luck(name, Colors.accents[accent]));
+      accent += 2;
 
     }
 //    this.names = [];
@@ -93,7 +95,7 @@ class _HomePageState extends State<HomePage>
           height: 72,
           width: 72,
           child: Text(
-            "GO",
+            "SPIN",
             style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
           ),
         ),
