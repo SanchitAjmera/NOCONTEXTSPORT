@@ -6,9 +6,15 @@ import 'board_view.dart';
 import 'model.dart';
 
 class HomePage extends StatefulWidget {
+
+  List<String> names;
+
+  //contructor enabling passing of name details
+  HomePage({Key key, @required this.names}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return _HomePageState();
+    return _HomePageState(names: names);
   }
 }
 
@@ -18,14 +24,17 @@ class _HomePageState extends State<HomePage>
   double _current = 0;
   AnimationController _ctrl;
   Animation _ani;
-  List<Luck> _items = [
-    Luck("Sami", Colors.accents[0]),
-    Luck("Rajun", Colors.accents[2]),
-    Luck("Max", Colors.accents[4]),
-    Luck("Sanch", Colors.accents[6]),
-    Luck("Emir", Colors.accents[8]),
-    Luck("Ali", Colors.accents[10]),
-  ];
+  List<Luck> _items = [];
+    // Luck("Sami", Colors.accents[0]),
+    // Luck("Rajun", Colors.accents[2]),
+    // Luck("Max", Colors.accents[4]),
+    // Luck("Sanch", Colors.accents[6]),
+    // Luck("Emir", Colors.accents[8]),
+    // Luck("Ali", Colors.accents[10]),
+//  ];
+  List<String> names;
+
+  _HomePageState({Key key, @required this.names});
 
   @override
   void initState() {
@@ -35,6 +44,13 @@ class _HomePageState extends State<HomePage>
     var _duration = Duration(milliseconds: 5000);
     _ctrl = AnimationController(vsync: this, duration: _duration);
     _ani = CurvedAnimation(parent: _ctrl, curve: Curves.fastLinearToSlowEaseIn);
+
+//    this._items = [];
+    for (String name in names){
+      _items.add(Luck(name, Colors.accents[0]));
+
+    }
+//    this.names = [];
   }
 
   @override
