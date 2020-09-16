@@ -102,6 +102,7 @@ class MainPage extends StatelessWidget {
                                           if (_formKey.currentState.validate()) {
                                             _formKey.currentState.save();
                                             navigateToSubPage(context);
+                                        //    getNames();
                                           }
                                         },
                                       ),
@@ -124,11 +125,10 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  List<String> getNames() {
-    return names;
-  }
-
   Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    print(names);
+    List<String> n2 = names;
+    names = [];
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(names: n2)));
   }
 }
