@@ -19,11 +19,13 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   // collection of names inputed by player
   List<String> names = new List();
+  List<Widget> _children = [];
+  List<TextEditingController> controllers = [];  //the controllers list
+  int _count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -73,43 +75,188 @@ class MainPage extends StatelessWidget {
                               ),
                               Form(
                                 key: _formKey,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                child: ListView(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.all(0),
                                   children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: TextFormField(
-                                        decoration: InputDecoration(
-                                          labelText: 'Name',
+                                    Center(
+                                      child: Card(
+                                        // changed gap between first and second borders
+                                        elevation: 0,
+                                        child: Container(
+                                          padding: EdgeInsets.all(0.0),
+                                          child: Column(
+                                            children: <Widget>[
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              TextField(
+                                                decoration: InputDecoration(
+                                                  prefixIcon: Icon(Icons.person),
+                                                  labelText: "Enter Name",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              Material(
+                                                borderRadius: BorderRadius.circular(30.0),
+                                                //elevation: 5.0,
+                                                child: MaterialButton(
+                                                  onPressed: () => {},
+                                                  minWidth: 150.0,
+                                                  height: 50.0,
+                                                  color: Color(0xFF179CDF),
+                                                  child: Text(
+                                                    "LOGIN",
+                                                    style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        onSaved: (input) => names.add(input),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: TextFormField(
-                                        decoration: InputDecoration(
-                                          labelText: 'Name',
-                                        ),
-                                        onSaved: (input) => names.add(input),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RaisedButton(
-                                        child: Text("Done"),
-                                        onPressed: () {
-                                          if (_formKey.currentState.validate()) {
-                                            _formKey.currentState.save();
-                                            navigateToSubPage(context);
-                                        //    getNames();
-                                          }
-                                        },
-                                      ),
-                                    )
                                   ],
                                 ),
-                              ),
+                                ),
+                                // child: Column(
+                                //   mainAxisSize: MainAxisSize.min,
+                                //   children: <Widget>[
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: EdgeInsets.all(5.0),
+                                //       child: TextFormField(
+                                //         decoration: InputDecoration(
+                                //           labelText: 'Name',
+                                //         ),
+                                //         onSaved: (input) => names.add(input),
+                                //       ),
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.all(5.0),
+                                //       child: RaisedButton(
+                                //         child: Text("Done"),
+                                //         onPressed: () {
+                                //           if (_formKey.currentState.validate()) {
+                                //             _formKey.currentState.save();
+                                //             navigateToSubPage(context);
+                                //         //    getNames();
+                                //           }
+                                //         },
+                                //       ),
+                                //     )
+                                //   ],
+                                // ),
+                              // ),
                             ],
                           ),
                         );
@@ -123,6 +270,22 @@ class MainPage extends StatelessWidget {
         )
       ),
     );
+  }
+
+  void _add() {
+
+    TextEditingController controller = TextEditingController();
+    controllers.add(controller);      //adding the current controller to the list
+
+    for(int i = 0; i < controllers.length; i++){
+      print(controllers[i].text);     //printing the values to show that it's working
+    }
+
+    _children = List.from(_children)
+      ..add(TextFormField(
+        controller: controller,
+        decoration: InputDecoration(hintText: "This is TextField $_count"),
+      ));
   }
 
   Future navigateToSubPage(context) async {
