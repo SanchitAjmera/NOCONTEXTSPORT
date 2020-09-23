@@ -31,45 +31,69 @@ class _mainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.add_comment),
-            onPressed: () {
-              setState(() {
-                showDialog = true;
-              });
-            }
-          )
-        ],
-      ),
-      body: new Column(
-        children: <Widget>[
-          new Text("Hello world"),
-          showDialog ?
-            new AlertDialog(
-              title: new Text("Enter Name"),
-              content: new TextField(
-                controller: eCtrl,
-                decoration: new InputDecoration.collapsed(hintText: "ADD NAME"),
-                maxLines: 1,
-                onSubmitted: (String text){
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.green, Colors.blue.withOpacity(0.2)])),
 
-                }
+        child: new Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 100),
+              child: Center(
+                child: new AlertDialog(
+                  //  title: new Text("Enter Name"),
+                  content: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 150.0,
+                        child: new TextField(
+                          controller: eCtrl,
+                          decoration: new InputDecoration.collapsed(hintText: "ENTER NAME"),
+                          maxLines: 1,
+                          onSubmitted: (String text){
+                          }
+                        ),
+                        //  ),
+                      ),
+                      new Spacer(), // I just added one line
+                      new Spacer(), // I just added one line
+                      Container(
+                        width: 40.0,
+                        child: new FlatButton (
+                          onPressed: () {
+                            setState(() {
+                              if (eCtrl.text != ""){
+                                names.add(eCtrl.text);
+                              }
+                              eCtrl.clear();
+                            });
+                          },
+                          child: new Icon(Icons.add_circle_outline),
+                        ),
+                      ),
+                      Container(
+                        width: 40.0,
+                        child: new FlatButton (
+                          onPressed: () {
+                            setState(() {
+                              eCtrl.clear();
+                              navigateToSubPage(context);
+                            });
+                          },
+                          child: new Icon(Icons.arrow_forward),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              actions: <Widget>[
-                new FlatButton (
-                  onPressed: () {
-                    setState(() {
-                      showDialog = false;
-                      names.add(eCtrl.text);
-                      eCtrl.clear();
-                    });
-                  },
-                  child: new Text("OK"),
-                )
-              ],
-            ) : new Text(""),
+            ),
+
 
             new Flexible(
               child: new ListView.builder(
@@ -82,11 +106,12 @@ class _mainPageState extends State<MainPage> {
                     ],
                   );
                 }
-              )
-            )
+              ),
+            ),
           ],
-        )
-      );
+        ),
+      ),
+    );
   }
 
 
