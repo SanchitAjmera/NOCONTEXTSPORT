@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'question_page.dart';
 import 'board_view.dart';
 import 'model.dart';
 
@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage>
   AnimationController _ctrl;
   Animation _ani;
   List<Luck> _items = [];
+  var _value;
     // Luck("Sami", Colors.accents[0]),
     // Luck("Rajun", Colors.accents[2]),
     // Luck("Max", Colors.accents[4]),
@@ -66,8 +67,8 @@ class _HomePageState extends State<HomePage>
             animation: _ani,
             builder: (context, child) {
               // value is the future endpoint of the wheel
-              final _value = _ani.value;
-              print(_value);
+              _value = _ani.value;
+              //print(_value);
               // angle is angle the wheel spins
               final _angle = _value * this._angle;
               return Stack(
@@ -112,42 +113,11 @@ _animation() {
         _current = _current - _current ~/ 1;
         _ctrl.reset();
         print("stopped animating");
-      //  popUpQuestion("title", "name");
         navigateToHomePage(context);
         print("done popup");
       });
-    // } else {
-    //   print("stopped animating");
     }
   }
-
-Widget popUpQuestion(String title, String name) => Column(
-  children:[
-    Container(
-      margin: EdgeInsets.only(top: 100),
-      child: Center(
-        child: new AlertDialog(
-          //  title: new Text("Enter Name"),
-          content: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 150.0,
-                child: new TextField(
-                  decoration: new InputDecoration.collapsed(hintText: "ENTER NAME"),
-                  maxLines: 1,
-                  onSubmitted: (String text){
-                  }
-                ),
-                //  ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  ]);
 
   int _calIndex(value) {
     // base is the index of the randomly chosen component
@@ -173,6 +143,7 @@ Widget popUpQuestion(String title, String name) => Column(
   }
 
   Future navigateToHomePage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+    var _index = _calIndex(_value * _angle + _current);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset)));
   }
 }
