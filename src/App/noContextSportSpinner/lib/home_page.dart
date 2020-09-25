@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
+import 'main.dart';
 import 'board_view.dart';
 import 'model.dart';
 
@@ -45,14 +45,12 @@ class _HomePageState extends State<HomePage>
     _ctrl = AnimationController(vsync: this, duration: _duration);
     _ani = CurvedAnimation(parent: _ctrl, curve: Curves.fastLinearToSlowEaseIn);
 
-//    this._items = [];
     int accent = 0;
     for (String name in names){
       _items.add(Luck(name, Colors.accents[accent]));
       accent += 2;
 
     }
-//    this.names = [];
   }
 
   @override
@@ -69,6 +67,7 @@ class _HomePageState extends State<HomePage>
             builder: (context, child) {
               // value is the future endpoint of the wheel
               final _value = _ani.value;
+              print(_value);
               // angle is angle the wheel spins
               final _angle = _value * this._angle;
               return Stack(
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  _animation() {
+_animation() {
     if (!_ctrl.isAnimating) {
       var _random = Random().nextDouble();
       _angle = 20 + Random().nextInt(5) + _random;
@@ -112,9 +111,43 @@ class _HomePageState extends State<HomePage>
         _current = (_current + _random);
         _current = _current - _current ~/ 1;
         _ctrl.reset();
+        print("stopped animating");
+      //  popUpQuestion("title", "name");
+        navigateToHomePage(context);
+        print("done popup");
       });
+    // } else {
+    //   print("stopped animating");
     }
   }
+
+Widget popUpQuestion(String title, String name) => Column(
+  children:[
+    Container(
+      margin: EdgeInsets.only(top: 100),
+      child: Center(
+        child: new AlertDialog(
+          //  title: new Text("Enter Name"),
+          content: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 150.0,
+                child: new TextField(
+                  decoration: new InputDecoration.collapsed(hintText: "ENTER NAME"),
+                  maxLines: 1,
+                  onSubmitted: (String text){
+                  }
+                ),
+                //  ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  ]);
 
   int _calIndex(value) {
     // base is the index of the randomly chosen component
@@ -137,5 +170,9 @@ class _HomePageState extends State<HomePage>
         )//Image.asset(_asset, height: 80, width: 80),
       ),
     );
+  }
+
+  Future navigateToHomePage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
   }
 }
