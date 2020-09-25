@@ -81,6 +81,9 @@ class _mainPageState extends State<MainPage> {
                         child: new FlatButton (
                           onPressed: () {
                             setState(() {
+                              if (eCtrl.text != ""){
+                                names.add(eCtrl.text);
+                              }
                               eCtrl.clear();
                               navigateToSubPage(context);
                             });
@@ -101,7 +104,6 @@ class _mainPageState extends State<MainPage> {
                 itemBuilder: (BuildContext ctxt, int index) {
                   return new Column(
                     children: <Widget>[
-
                       new Text(names[index])
                     ],
                   );
