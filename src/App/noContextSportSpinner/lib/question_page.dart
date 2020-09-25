@@ -41,11 +41,19 @@ class _QuestionPageState extends State<QuestionPage>
                 colors: [Colors.green, Colors.blue.withOpacity(0.2)])),
         child: Center(
           child: new AlertDialog(
-            //  title: new Text("Enter Name"),
-            content: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Container(
+
+                  width: 150.0,
+                  child: new TextField(
+                    decoration: new InputDecoration.collapsed(hintText: name),
+                    maxLines: 1,
+                    onSubmitted: (String text){
+                    }
+                  ),
+                ),
                 Container(
                   width: 150.0,
                   child: new TextField(
@@ -54,10 +62,35 @@ class _QuestionPageState extends State<QuestionPage>
                     onSubmitted: (String text){
                     }
                   ),
-                  //  ),
                 ),
-              ],
-            ),
+                Container(
+                  width: 150.0,
+                  child: new TextField(
+                    decoration: new InputDecoration.collapsed(hintText: name),
+                    maxLines: 1,
+                    onSubmitted: (String text){
+                    }
+                  ),
+                ),
+              ]
+            )
+
+          //   content: Row(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: <Widget>[
+          //       Container(
+          //         width: 150.0,
+          //         child: new TextField(
+          //           decoration: new InputDecoration.collapsed(hintText: name),
+          //           maxLines: 1,
+          //           onSubmitted: (String text){
+          //           }
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           ),
         ),
       ),
