@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.green, Colors.blue.withOpacity(0.2)])),
+                colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
         child: AnimatedBuilder(
             animation: _ani,
             builder: (context, child) {

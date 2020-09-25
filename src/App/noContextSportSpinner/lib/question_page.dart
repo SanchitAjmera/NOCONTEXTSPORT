@@ -38,7 +38,7 @@ class _QuestionPageState extends State<QuestionPage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.green, Colors.blue.withOpacity(0.2)])),
+                colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
         child: Center(
           child: new AlertDialog(
             content: Column(
