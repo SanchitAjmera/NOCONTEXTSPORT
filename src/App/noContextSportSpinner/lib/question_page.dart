@@ -26,6 +26,9 @@ class _QuestionPageState extends State<QuestionPage>
   Questions questions = new Questions();
   List<int> ordering = null;
   Map<String, bool> question = null;
+  Color _colorContainer1 = Colors.white;
+  Color _colorContainer2 = Colors.white;
+  Color _colorContainer3 = Colors.white;
 
   _QuestionPageState(String name){
     this.name  = name;
@@ -60,25 +63,46 @@ class _QuestionPageState extends State<QuestionPage>
                   child: Container(
                     width: 300,
                     height: 70,
+                    color: _colorContainer1,
                     child: new Text(getQuestion().keys.toList()[getOrdering()[0]]),
                   ),
-                  onTap: () {print("Tapped container 1");},
+                  onTap: () {
+                    setState(() {
+                      _colorContainer1 = question.values.toList()[getOrdering()[0]] ?
+                            Colors.green :
+                            Colors.red;
+                    });
+                  },
                 ),
                 InkWell(
                   child: Container(
                     width: 300,
                     height: 70,
+                    color: _colorContainer2,
                     child: new Text(getQuestion().keys.toList()[getOrdering()[1]]),
                   ),
-                  onTap: () {print("Tapped container 1");},
+                  onTap: () {
+                    setState(() {
+                      _colorContainer2 = question.values.toList()[getOrdering()[1]] ?
+                            Colors.green :
+                            Colors.red;
+                    });
+                  },
                 ),
                 InkWell(
                   child: Container(
                     width: 300,
                     height: 70,
+                    color: _colorContainer3,
                     child: new Text(getQuestion().keys.toList()[getOrdering()[2]]),
                   ),
-                  onTap: () {print("Tapped container 1");},
+                  onTap: () {
+                    setState(() {
+                      _colorContainer3 = question.values.toList()[getOrdering()[2]] ?
+                            Colors.green :
+                            Colors.red;
+                    });
+                  },
                 ),
               ]
             )
