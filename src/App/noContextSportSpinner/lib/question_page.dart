@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'board_view.dart';
@@ -22,6 +22,8 @@ class _QuestionPageState extends State<QuestionPage>
     with SingleTickerProviderStateMixin {
 
   String name;
+  HashMap
+
   _QuestionPageState({Key key, @required this.name});
 
   @override
@@ -41,36 +43,38 @@ class _QuestionPageState extends State<QuestionPage>
                 colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
         child: Center(
           child: new AlertDialog(
+            contentPadding: EdgeInsets.all(0.0),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-
-                  width: 150.0,
-                  child: new TextField(
-                    decoration: new InputDecoration.collapsed(hintText: name),
-                    maxLines: 1,
-                    onSubmitted: (String text){
-                    }
-                  ),
+                  width: 300,
+                  height: 200,
+                  child: new Text("question"),
                 ),
-                Container(
-                  width: 150.0,
-                  child: new TextField(
-                    decoration: new InputDecoration.collapsed(hintText: name),
-                    maxLines: 1,
-                    onSubmitted: (String text){
-                    }
+                InkWell(
+                  child: Container(
+                    width: 300,
+                    height: 70,
+                    child: new Text(name),
                   ),
+                  onTap: () {print("Tapped container 1");},
                 ),
-                Container(
-                  width: 150.0,
-                  child: new TextField(
-                    decoration: new InputDecoration.collapsed(hintText: name),
-                    maxLines: 1,
-                    onSubmitted: (String text){
-                    }
+                InkWell(
+                  child: Container(
+                    width: 300,
+                    height: 70,
+                    child: new Text(name),
                   ),
+                  onTap: () {print("Tapped container 1");},
+                ),
+                InkWell(
+                  child: Container(
+                    width: 300,
+                    height: 70,
+                    child: new Text(name),
+                  ),
+                  onTap: () {print("Tapped container 1");},
                 ),
               ]
             )
