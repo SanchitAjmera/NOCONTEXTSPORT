@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'board_view.dart';
 import 'model.dart';
+import 'questions.dart';
 
 class QuestionPage extends StatefulWidget {
 
@@ -14,7 +15,7 @@ class QuestionPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _QuestionPageState(name: name);
+    return _QuestionPageState(name);
   }
 }
 
@@ -22,13 +23,16 @@ class _QuestionPageState extends State<QuestionPage>
     with SingleTickerProviderStateMixin {
 
   String name;
-  HashMap
+  Questions questions = new Questions();
+  List<int> ordering = null;
+  Map<String, bool> question = null;
 
-  _QuestionPageState({Key key, @required this.name});
+  _QuestionPageState(String name){
+    this.name  = name;
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -50,13 +54,13 @@ class _QuestionPageState extends State<QuestionPage>
                 Container(
                   width: 300,
                   height: 200,
-                  child: new Text("question"),
+                  child: new Text(getQuestion().keys.toList()[0]),
                 ),
                 InkWell(
                   child: Container(
                     width: 300,
                     height: 70,
-                    child: new Text(name),
+                    child: new Text(getQuestion().keys.toList()[getOrdering()[0]]),
                   ),
                   onTap: () {print("Tapped container 1");},
                 ),
@@ -64,7 +68,7 @@ class _QuestionPageState extends State<QuestionPage>
                   child: Container(
                     width: 300,
                     height: 70,
-                    child: new Text(name),
+                    child: new Text(getQuestion().keys.toList()[getOrdering()[1]]),
                   ),
                   onTap: () {print("Tapped container 1");},
                 ),
@@ -72,32 +76,29 @@ class _QuestionPageState extends State<QuestionPage>
                   child: Container(
                     width: 300,
                     height: 70,
-                    child: new Text(name),
+                    child: new Text(getQuestion().keys.toList()[getOrdering()[2]]),
                   ),
                   onTap: () {print("Tapped container 1");},
                 ),
               ]
             )
-
-          //   content: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       Container(
-          //         width: 150.0,
-          //         child: new TextField(
-          //           decoration: new InputDecoration.collapsed(hintText: name),
-          //           maxLines: 1,
-          //           onSubmitted: (String text){
-          //           }
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           ),
         ),
       ),
     );
+  }
+
+  Map<String, bool> getQuestion(){
+    if (question == null){
+      question = questions.getQuestion();
+    }
+    return question;
+  }
+
+  List<int> getOrdering(){
+    if (ordering == null){
+      ordering = questions.getOrdering();
+    }
+    return ordering;
   }
 }
