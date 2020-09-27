@@ -14,32 +14,32 @@ class Questions {
     {
       'question1' : true,
       'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'answer2' : true,
+      'answer3' : true,
     },
     {
       'question2' : true,
       'answer1' : true,
       'answer2' : true,
-      'answer3' : false,
+      'answer3' : true,
     },
     {
       'question3' : true,
       'answer1' : true,
       'answer2' : true,
-      'answer3' : false,
+      'answer3' : true,
     },
     {
       'question4' : true,
       'answer1' : true,
       'answer2' : true,
-      'answer3' : false,
+      'answer3' : true,
     },
     {
       'question5' : true,
       'answer1' : true,
       'answer2' : true,
-      'answer3' : false,
+      'answer3' : true,
     },
   ];
 
