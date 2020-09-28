@@ -13,13 +13,14 @@ import 'truth_page.dart';
 class QuestionPage extends StatefulWidget {
 
   String name;
+  List<String> names;
 
   //contructor enabling passing of name details
-  QuestionPage({Key key, @required this.name}) : super(key: key);
+  QuestionPage({Key key, @required this.name, @required this.names}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _QuestionPageState(name);
+    return _QuestionPageState(name, names);
   }
 }
 
@@ -29,6 +30,7 @@ class _QuestionPageState extends State<QuestionPage>
   String name;
   Questions questions = new Questions();
   List<int> ordering = null;
+  List<String> names;
   Map<String, bool> question = null;
   Color _colorContainer1 = Colors.white;
   Color _colorContainer2 = Colors.white;
@@ -36,8 +38,9 @@ class _QuestionPageState extends State<QuestionPage>
 
   static int DELAY = 1;
 
-  _QuestionPageState(String name){
+  _QuestionPageState(String name, List<String> names){
     this.name  = name;
+    this.names = names;
   }
 
   @override
@@ -145,6 +148,6 @@ class _QuestionPageState extends State<QuestionPage>
   }
 
   Future navigateToTruth(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TruthPage(name: name)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TruthPage(name: name, names: names)));
   }
 }

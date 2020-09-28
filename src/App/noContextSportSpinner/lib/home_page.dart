@@ -26,13 +26,6 @@ class _HomePageState extends State<HomePage>
   Animation _ani;
   List<Luck> _items = [];
   var _value;
-    // Luck("Sami", Colors.accents[0]),
-    // Luck("Rajun", Colors.accents[2]),
-    // Luck("Max", Colors.accents[4]),
-    // Luck("Sanch", Colors.accents[6]),
-    // Luck("Emir", Colors.accents[8]),
-    // Luck("Ali", Colors.accents[10]),
-//  ];
   List<String> names;
 
   _HomePageState({Key key, @required this.names});
@@ -144,6 +137,6 @@ _animation() {
 
   Future navigateToHomePage(context) async {
     var _index = _calIndex(_value * _angle + _current);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset, names: names)));
   }
 }
