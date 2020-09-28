@@ -5,6 +5,10 @@ import 'main.dart';
 import 'board_view.dart';
 import 'model.dart';
 import 'questions.dart';
+import 'home_page.dart';
+import 'dart:async';
+import 'dart:io';
+import 'truth_page.dart';
 
 class QuestionPage extends StatefulWidget {
 
@@ -29,6 +33,8 @@ class _QuestionPageState extends State<QuestionPage>
   Color _colorContainer1 = Colors.white;
   Color _colorContainer2 = Colors.white;
   Color _colorContainer3 = Colors.white;
+
+  static int DELAY = 1;
 
   _QuestionPageState(String name){
     this.name  = name;
@@ -82,11 +88,19 @@ class _QuestionPageState extends State<QuestionPage>
                     child: new Text(getQuestion().keys.toList()[getOrdering()[1]]),
                   ),
                   onTap: () {
+                    bool res = question.values.toList()[getOrdering()[1]];
                     setState(() {
-                      _colorContainer2 = question.values.toList()[getOrdering()[1]] ?
-                            Colors.green :
-                            Colors.red;
+                      _colorContainer2 = res ? Colors.green : Colors.red;
                     });
+                    if (res){
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        Navigator.pop(context);
+                      });
+                    } else {
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        navigateToTruth(context);
+                      });
+                    }
                   },
                 ),
                 InkWell(
@@ -124,5 +138,13 @@ class _QuestionPageState extends State<QuestionPage>
       ordering = questions.getOrdering();
     }
     return ordering;
+  }
+
+  Future sleep1() {
+    return new Future.delayed(const Duration(seconds: 1), () => "1");
+  }
+
+  Future navigateToTruth(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TruthPage(name: name)));
   }
 }
