@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'question_page.dart';
 import 'board_view.dart';
@@ -105,9 +104,9 @@ _animation() {
         _current = (_current + _random);
         _current = _current - _current ~/ 1;
         _ctrl.reset();
-        print("stopped animating");
+      //  print("stopped animating");
         navigateToHomePage(context);
-        print("done popup");
+      //  print("done popup");
       });
     }
   }
@@ -137,6 +136,6 @@ _animation() {
 
   Future navigateToHomePage(context) async {
     var _index = _calIndex(_value * _angle + _current);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset, names: names)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset)));
   }
 }
