@@ -55,16 +55,22 @@ class _TDPageState extends State<TDPage>
               colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
           child: Center(
             child: new AlertDialog(
-              contentPadding: EdgeInsets.all(0.0),
+              contentPadding: EdgeInsets.all(20),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   InkWell(
                     child: Container(
                       width: 300,
-                      height: 70,
+                //      height: 70,
                       color: _colorContainer1,
-                      child: new Text(truthOrDare()),
+                      child: Center(
+                        child: Text(
+                          truthOrDare(),
+                          style: TextStyle(fontSize: 25),
+                          textAlign: TextAlign.center
+                        ),
+                      ),
                     ),
                   ),
                 ],
