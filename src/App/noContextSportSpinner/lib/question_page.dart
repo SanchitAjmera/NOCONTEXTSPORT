@@ -8,19 +8,18 @@ import 'questions.dart';
 import 'home_page.dart';
 import 'dart:async';
 import 'dart:io';
-import 'truth_page.dart';
+import 'TD_page.dart';
 
 class QuestionPage extends StatefulWidget {
 
   String name;
-  List<String> names;
 
   //contructor enabling passing of name details
-  QuestionPage({Key key, @required this.name, @required this.names}) : super(key: key);
+  QuestionPage({Key key, @required this.name}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _QuestionPageState(name, names);
+    return _QuestionPageState(name);
   }
 }
 
@@ -30,7 +29,6 @@ class _QuestionPageState extends State<QuestionPage>
   String name;
   Questions questions = new Questions();
   List<int> ordering = null;
-  List<String> names;
   Map<String, bool> question = null;
   Color _colorContainer1 = Colors.white;
   Color _colorContainer2 = Colors.white;
@@ -38,9 +36,8 @@ class _QuestionPageState extends State<QuestionPage>
 
   static int DELAY = 1;
 
-  _QuestionPageState(String name, List<String> names){
+  _QuestionPageState(String name){
     this.name  = name;
-    this.names = names;
   }
 
   @override
@@ -59,28 +56,49 @@ class _QuestionPageState extends State<QuestionPage>
                 colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
         child: Center(
           child: new AlertDialog(
-            contentPadding: EdgeInsets.all(0.0),
+            contentPadding: EdgeInsets.all(0),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
                   width: 300,
                   height: 200,
-                  child: new Text(getQuestion().keys.toList()[0]),
+                  padding: EdgeInsets.all(20),
+                  child: Center(
+                    child: Text(
+                      getQuestion().keys.toList()[0],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
                 ),
                 InkWell(
                   child: Container(
                     width: 300,
                     height: 70,
                     color: _colorContainer1,
-                    child: new Text(getQuestion().keys.toList()[getOrdering()[0]]),
+                    child: Center(
+                      child: Text(
+                        getQuestion().keys.toList()[getOrdering()[0]],
+                        style: TextStyle(fontSize: 25),
+                        textAlign: TextAlign.center
+                      ),
+                    ),
                   ),
                   onTap: () {
+                    bool res = question.values.toList()[getOrdering()[0]];
                     setState(() {
-                      _colorContainer1 = question.values.toList()[getOrdering()[0]] ?
-                            Colors.green :
-                            Colors.red;
+                      _colorContainer1 = res ? Colors.green : Colors.red;
                     });
+                    if (res){
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        Navigator.pop(context);
+                      });
+                    } else {
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        navigateToTDPage(context);
+                      });
+                    }
                   },
                 ),
                 InkWell(
@@ -88,7 +106,13 @@ class _QuestionPageState extends State<QuestionPage>
                     width: 300,
                     height: 70,
                     color: _colorContainer2,
-                    child: new Text(getQuestion().keys.toList()[getOrdering()[1]]),
+                    child: Center(
+                      child: Text(
+                        getQuestion().keys.toList()[getOrdering()[1]],
+                        style: TextStyle(fontSize: 25),
+                        textAlign: TextAlign.center
+                      ),
+                    ),
                   ),
                   onTap: () {
                     bool res = question.values.toList()[getOrdering()[1]];
@@ -101,7 +125,7 @@ class _QuestionPageState extends State<QuestionPage>
                       });
                     } else {
                       Future.delayed(Duration(seconds: DELAY), () {
-                        navigateToTruth(context);
+                        navigateToTDPage(context);
                       });
                     }
                   },
@@ -111,14 +135,28 @@ class _QuestionPageState extends State<QuestionPage>
                     width: 300,
                     height: 70,
                     color: _colorContainer3,
-                    child: new Text(getQuestion().keys.toList()[getOrdering()[2]]),
+                    child: Center(
+                      child: Text(
+                        getQuestion().keys.toList()[getOrdering()[2]],
+                        style: TextStyle(fontSize: 25),
+                        textAlign: TextAlign.center
+                      ),
+                    ),
                   ),
                   onTap: () {
+                    bool res = question.values.toList()[getOrdering()[2]];
                     setState(() {
-                      _colorContainer3 = question.values.toList()[getOrdering()[2]] ?
-                            Colors.green :
-                            Colors.red;
+                      _colorContainer3 = res ? Colors.green : Colors.red;
                     });
+                    if (res){
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        Navigator.pop(context);
+                      });
+                    } else {
+                      Future.delayed(Duration(seconds: DELAY), () {
+                        navigateToTDPage(context);
+                      });
+                    }
                   },
                 ),
               ]
@@ -147,7 +185,7 @@ class _QuestionPageState extends State<QuestionPage>
     return new Future.delayed(const Duration(seconds: 1), () => "1");
   }
 
-  Future navigateToTruth(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TruthPage(name: name, names: names)));
+  Future navigateToTDPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name)));
   }
 }
