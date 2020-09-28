@@ -11,41 +11,19 @@ class Truths {
   String name;
 
   List<String> truths = [
-    {
-      'question1' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
-    },
-    {
-      'question2' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
-    },
-    {
-      'question3' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
-    },
-    {
-      'question4' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
-    },
-    {
-      'question5' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
-    },
+    "truth_1",
+    "truth_2",
+    "truth_3",
+    "truth_4",
+    "truth_5",
+    "truth_6",
+    "truth_7",
+    "truth_8"
   ];
 
   Truths({Key key});
 
-  Map<String, bool> getQuestion(){
+String getTruth(){
     var _random = (Random().nextDouble() * truths.length).floor();
     return truths[_random];
   }
