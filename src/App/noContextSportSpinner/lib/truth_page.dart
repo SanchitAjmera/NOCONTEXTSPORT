@@ -9,6 +9,7 @@ import 'home_page.dart';
 import 'dart:async';
 import 'dart:io';
 import 'question_page.dart';
+import 'truths.dart';
 
 
 class TruthPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _TruthPageState extends State<TruthPage>
 
   String name;
   Color _colorContainer1 = Colors.white;
+  Truths truths = new Truths();
 
   _TruthPageState(String name){
     this.name  = name;
@@ -60,7 +62,7 @@ class _TruthPageState extends State<TruthPage>
                     width: 300,
                     height: 70,
                     color: _colorContainer1,
-                    child: new Text("getQuestion().keys.toList()[getOrdering()[0]]"),
+                    child: new Text(truths.getTruth()),
                   ),
                 ),
               ],
