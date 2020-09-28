@@ -61,7 +61,7 @@ class _mainPageState extends State<MainPage> {
               child: Center(
                 child: new AlertDialog(
                   contentPadding: EdgeInsets.only(
-                    left: 20,
+                    left: 40,
                     right: 20,
                   ),
                   //  title: new Text("Enter Name"),
@@ -71,7 +71,7 @@ class _mainPageState extends State<MainPage> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.all(0),
-                        width: 150.0,
+                        width: 130.0,
                         child: Center(
                           child: TextField(
                             style: TextStyle(fontSize: 20),
@@ -83,8 +83,8 @@ class _mainPageState extends State<MainPage> {
                           ),
                         ),
                       ),
-                      new Spacer(), // I just added one line
-                      new Spacer(), // I just added one line
+                      new Spacer(),
+  //                    new Spacer(),
                       Container(
                         width: 40.0,
                         child: new FlatButton (

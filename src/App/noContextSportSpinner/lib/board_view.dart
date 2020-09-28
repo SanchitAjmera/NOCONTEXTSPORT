@@ -15,7 +15,7 @@ class BoardView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _BoardViewState();
+    return _BoardViewState(number : items.length);
   }
 }
 
@@ -25,6 +25,9 @@ class _BoardViewState extends State<BoardView> {
       MediaQuery.of(context).size.width * 0.8);
 
   double _rotote(int index) => (index / widget.items.length) * 2 * pi;
+  int number;
+
+  _BoardViewState({Key key, @required this.number});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +94,7 @@ class _BoardViewState extends State<BoardView> {
               BoxConstraints.expand(height: size.height / 3, width: 100.0),
           child: new Text(luck.asset,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold, height : 2.0),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, height : 2.0),
           ),// Image.asset(luck.asset),
         ),
       ),
