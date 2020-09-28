@@ -12,35 +12,53 @@ class Questions {
 
   List<Map<String, bool>> questions = [
     {
-      'question1' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
     },
     {
-      'question2' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
     },
     {
-      'question3' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
     },
     {
-      'question4' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
     },
     {
-      'question5' : true,
-      'answer1' : true,
-      'answer2' : false,
-      'answer3' : false,
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
     },
+    {
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
+    },
+    {
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
+    },
+    {
+      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
+      'Rafa Nadal' : true,
+      'Cristiano Ronaldo' : false,
+      'Sergio Ramos' : false,
+    }
   ];
 
   Questions({Key key});
