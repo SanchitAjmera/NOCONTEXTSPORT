@@ -40,25 +40,48 @@ class _mainPageState extends State<MainPage> {
 
         child: new Column(
           children: <Widget>[
+
+            new Flexible(
+              child: new ListView.builder(
+                itemCount: names.length,
+                itemBuilder: (BuildContext ctxt, int index) {
+                  return new Column(
+                    children: <Widget>[
+                      new Text(
+                        names[index],
+                        style: TextStyle(fontSize: 25),
+                        textAlign: TextAlign.center)
+                    ],
+                  );
+                }
+              ),
+            ),
             Container(
-              margin: EdgeInsets.only(top: 100),
+              margin: EdgeInsets.only(bottom: 0),
               child: Center(
                 child: new AlertDialog(
+                  contentPadding: EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
                   //  title: new Text("Enter Name"),
                   content: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
+                        padding: EdgeInsets.all(0),
                         width: 150.0,
-                        child: new TextField(
-                          controller: eCtrl,
-                          decoration: new InputDecoration.collapsed(hintText: "ENTER NAME"),
-                          maxLines: 1,
-                          onSubmitted: (String text){
-                          }
+                        child: Center(
+                          child: TextField(
+                            style: TextStyle(fontSize: 20),
+                        //    textAlign: TextAlign.center,
+                            controller: eCtrl,
+                            decoration: new InputDecoration.collapsed( hintText: "ENTER NAME"),
+                            maxLines: 1,
+                            onSubmitted: (String text){}
+                          ),
                         ),
-                        //  ),
                       ),
                       new Spacer(), // I just added one line
                       new Spacer(), // I just added one line
@@ -98,18 +121,7 @@ class _mainPageState extends State<MainPage> {
             ),
 
 
-            new Flexible(
-              child: new ListView.builder(
-                itemCount: names.length,
-                itemBuilder: (BuildContext ctxt, int index) {
-                  return new Column(
-                    children: <Widget>[
-                      new Text(names[index])
-                    ],
-                  );
-                }
-              ),
-            ),
+
           ],
         ),
       ),
