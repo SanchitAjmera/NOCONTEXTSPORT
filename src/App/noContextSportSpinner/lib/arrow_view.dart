@@ -10,7 +10,7 @@ class ArrowView extends StatelessWidget {
       child: Transform.rotate(
         angle: pi,
         child: Padding(
-          padding: EdgeInsets.only(top: 80),
+          padding: EdgeInsets.only(top: 110),
           child: ClipPath(
             clipper: _ArrowClipper(),
             child: Container(
