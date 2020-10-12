@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage>
   List<Luck> _items = [];
   var _value;
   List<String> names;
-
+  String name;
   _HomePageState({Key key, @required this.names});
 
   @override
@@ -71,6 +71,14 @@ class _HomePageState extends State<HomePage>
                   BoardView(items: _items, current: _current, angle: _angle),
                   _buildGo(),
                   _buildResult(_value),
+                  Positioned(
+                    top: 60,
+                    child: new Text(
+                      "NOCONTEXTSPORT",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
                 ],
               );
             }),
@@ -107,7 +115,8 @@ _animation() {
         _current = _current - _current ~/ 1;
         _ctrl.reset();
       //  print("stopped animating");
-    //    _buildName();
+        var _index = _calIndex(_value * _angle + _current);
+        // this.name =  _items[_index].asset;
         navigateToHomePage(context);
       //  print("done popup");
       });
@@ -125,6 +134,7 @@ _animation() {
     var _index = _calIndex(_value * _angle + _current);
     // items[index] refers to the chosen picture to display
     String _asset = _items[_index].asset;
+    name = _asset;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 70.0),
       child: Align(
@@ -138,52 +148,8 @@ _animation() {
     );
   }
 
-  _buildName(){
-    // showGeneralDialog(
-    //   barrierColor: Colors.black.withOpacity(0.5),
-    //   transitionBuilder: (context, a1, a2, widget) {
-    //     return Transform.scale(
-    //       scale: a1.value,
-    //       child: Opacity(
-    //         opacity: a1.value,
-    //         child: AlertDialog(
-    //           shape: OutlineInputBorder(
-    //             borderRadius: BorderRadius.circular(16.0)),
-    //             title: Text('Hello!!'),
-    //             content: Text('How are you?'),
-    //           ),
-    //         ),
-    //
-    //       );
-    //     },
-    //     transitionDuration: Duration(milliseconds: 200),
-    //     barrierDismissible: true,
-    //     barrierLabel: '',
-    //     context: context,
-    //     pageBuilder: (context, animation1, animation2) {});
-    return Container(
-      child: ScaleAnimatedTextKit(
-        onTap: () {
-            print("Tap Event");
-          },
-        text: [
-          "Think",
-          "Build",
-          "Ship"
-          ],
-        textStyle: TextStyle(
-            fontSize: 70.0,
-            fontFamily: "Canterbury"
-        ),
-        textAlign: TextAlign.start,
-        alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-      ),
-    );
-  }
-
-
   Future navigateToHomePage(context) async {
     var _index = _calIndex(_value * _angle + _current);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: _items[_index].asset)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: name)));
   }
 }
