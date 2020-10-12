@@ -5,7 +5,7 @@ import 'main.dart';
 import 'board_view.dart';
 import 'model.dart';
 
-
+ 
 class Questions {
 
   String name;
