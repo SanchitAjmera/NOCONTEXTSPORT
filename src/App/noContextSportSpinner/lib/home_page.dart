@@ -1,8 +1,10 @@
 import 'dart:math';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'question_page.dart';
 import 'board_view.dart';
 import 'model.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
+                colors: [Colors.yellow.withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
         child: AnimatedBuilder(
             animation: _ani,
             builder: (context, child) {
@@ -84,11 +86,11 @@ class _HomePageState extends State<HomePage>
         customBorder: CircleBorder(),
         child: Container(
           alignment: Alignment.center,
-          height: 72,
-          width: 72,
+          height: 110,
+          width: 110,
           child: Text(
             "SPIN",
-            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
           ),
         ),
         onTap: _animation,
@@ -105,10 +107,12 @@ _animation() {
         _current = _current - _current ~/ 1;
         _ctrl.reset();
       //  print("stopped animating");
+    //    _buildName();
         navigateToHomePage(context);
       //  print("done popup");
       });
     }
+
   }
 
   int _calIndex(value) {
@@ -122,17 +126,61 @@ _animation() {
     // items[index] refers to the chosen picture to display
     String _asset = _items[_index].asset;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: EdgeInsets.symmetric(vertical: 70.0),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: new Text(
           _asset,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold, color: Colors.white),
         )//Image.asset(_asset, height: 80, width: 80),
       ),
     );
   }
+
+  _buildName(){
+    // showGeneralDialog(
+    //   barrierColor: Colors.black.withOpacity(0.5),
+    //   transitionBuilder: (context, a1, a2, widget) {
+    //     return Transform.scale(
+    //       scale: a1.value,
+    //       child: Opacity(
+    //         opacity: a1.value,
+    //         child: AlertDialog(
+    //           shape: OutlineInputBorder(
+    //             borderRadius: BorderRadius.circular(16.0)),
+    //             title: Text('Hello!!'),
+    //             content: Text('How are you?'),
+    //           ),
+    //         ),
+    //
+    //       );
+    //     },
+    //     transitionDuration: Duration(milliseconds: 200),
+    //     barrierDismissible: true,
+    //     barrierLabel: '',
+    //     context: context,
+    //     pageBuilder: (context, animation1, animation2) {});
+    return Container(
+      child: ScaleAnimatedTextKit(
+        onTap: () {
+            print("Tap Event");
+          },
+        text: [
+          "Think",
+          "Build",
+          "Ship"
+          ],
+        textStyle: TextStyle(
+            fontSize: 70.0,
+            fontFamily: "Canterbury"
+        ),
+        textAlign: TextAlign.start,
+        alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+      ),
+    );
+  }
+
 
   Future navigateToHomePage(context) async {
     var _index = _calIndex(_value * _angle + _current);
