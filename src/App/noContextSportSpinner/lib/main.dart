@@ -43,11 +43,11 @@ class _mainPageState extends State<MainPage> {
         child: new Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-              
+
             Positioned(
               width: 300.0,
               height: 100.0,
-              top: 100,
+              top: 150,
               child : Container(
                 child: Center(
                   child: new Image.asset('asset/image/sportify.png'),
@@ -127,6 +127,13 @@ class _mainPageState extends State<MainPage> {
                   },
                   child: const Text('Play', style: TextStyle(fontSize: 40)),
                 ),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              child: Text(
+                "BY NOCONTEXTSPORT",
+                style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "sd"),
               ),
             ),
           ],
