@@ -59,26 +59,12 @@ class _TDPageState extends State<TDPage>
               end: Alignment.bottomCenter,
               colors: [_background.withOpacity(1), _background.withOpacity(1)])),
           child: Center(
-            child: new AlertDialog(
-              contentPadding: EdgeInsets.all(20),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  InkWell(
-                    child: Container(
-                      width: 300,
-                //      height: 70,
-                      color: _colorContainer1,
-                      child: Center(
-                        child: Text(
-                          truthOrDare(),
-                          style: TextStyle(fontSize: 25),
-                          textAlign: TextAlign.center
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            child: Container(
+              width: 350,
+              child: Text(
+                truthOrDare(),
+                style: TextStyle(fontSize: 40, color: Colors.white),
+                textAlign: TextAlign.center
               ),
             ),
           ),
