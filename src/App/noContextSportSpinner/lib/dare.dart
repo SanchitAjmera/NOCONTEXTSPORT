@@ -57,7 +57,7 @@ class _DareState extends State<Dare>
               colors: [Colors.red.withOpacity(1), Colors.red.withOpacity(1)])),
           child: Center(
             child: Text(
-              "dare",
+              "Dare!",
               style: TextStyle(fontSize: 70.0, color: Colors.white),
             ),
           ),
