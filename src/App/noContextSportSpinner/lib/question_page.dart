@@ -61,7 +61,7 @@ class _QuestionPageState extends State<QuestionPage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.blue.withOpacity(1), Colors.blue.withOpacity(1)])),
+                colors: [Colors.pink.withOpacity(1), Colors.yellow.withOpacity(1)])),
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
