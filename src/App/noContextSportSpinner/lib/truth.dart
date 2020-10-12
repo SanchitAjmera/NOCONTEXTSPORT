@@ -57,7 +57,7 @@ class _TruthState extends State<Truth>
               colors: [Colors.green.withOpacity(1), Colors.green.withOpacity(1)])),
           child: Center(
             child: Text(
-              "Truth",
+              "Truth!",
               style: TextStyle(fontSize: 70.0, color: Colors.white),
             ),
           ),
