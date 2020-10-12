@@ -15,25 +15,29 @@ import 'TD.dart';
 class TDPage extends StatefulWidget {
 
   String name;
+  int forfeit;
 
   //contructor enabling passing of name details
-  TDPage({Key key, @required this.name}) : super(key: key);
+  TDPage({Key key, @required this.name, @required this.forfeit}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _TDPageState(name);
+    return _TDPageState(name, forfeit);
   }
 }
 
 class _TDPageState extends State<TDPage>
     with SingleTickerProviderStateMixin {
 
-  String name;
-  Color _colorContainer1 = Colors.white;
-
-  _TDPageState(String name){
+  _TDPageState(String name, int forfeit){
     this.name  = name;
+    this.forfeit = forfeit;
   }
+  String name;
+  int forfeit;
+  Color _colorContainer1 = Colors.white;
+  Color _background;
+
 
   @override
   void initState() {
@@ -43,6 +47,7 @@ class _TDPageState extends State<TDPage>
 
   @override
   Widget build(BuildContext context) {
+    this._background = forfeit != 1 ? Colors.green : Colors.red;
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -52,7 +57,7 @@ class _TDPageState extends State<TDPage>
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
+              colors: [_background.withOpacity(1), _background.withOpacity(1)])),
           child: Center(
             child: new AlertDialog(
               contentPadding: EdgeInsets.all(20),
@@ -85,7 +90,7 @@ class _TDPageState extends State<TDPage>
   String truthOrDare(){
     TD td = new TD();
     var _random = (Random().nextDouble() * 2).round() + 1;
-    if (_random == 1) {
+    if (forfeit != 1) {
       return td.getTruth();
     } else {
       return td.getDare();
@@ -93,6 +98,7 @@ class _TDPageState extends State<TDPage>
   }
 
   Future navigateToSubPage(context) async {
+    Navigator.pop(context);
     Navigator.pop(context);
     Navigator.pop(context);
     //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(names: names)));

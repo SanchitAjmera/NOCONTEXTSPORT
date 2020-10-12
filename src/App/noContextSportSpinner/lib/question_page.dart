@@ -10,6 +10,9 @@ import 'dart:async';
 import 'dart:io';
 import 'TD_page.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'dare.dart';
+import 'truth.dart';
+import 'package:page_transition/page_transition.dart';
 
 class QuestionPage extends StatefulWidget {
 
@@ -58,7 +61,7 @@ class _QuestionPageState extends State<QuestionPage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.purple.withOpacity(1), Colors.pink.withOpacity(1)])),
+                colors: [Colors.blue.withOpacity(1), Colors.blue.withOpacity(1)])),
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
@@ -205,50 +208,21 @@ class _QuestionPageState extends State<QuestionPage>
     return ordering;
   }
 
+  int truthOrDare(){
+    return (Random().nextDouble()).round();
+  }
+
   Future sleep1() {
     return new Future.delayed(const Duration(seconds: 1), () => "1");
   }
 
   Future navigateToTDPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name)));
-  }
-}
-
-class ShakeTransition extends StatelessWidget {
-  const ShakeTransition({
-    Key key,
-    this.duration = const Duration(milliseconds: 900),
-    this.offset = 140.0,
-    this.axis = Axis.horizontal,
-    @required this.child
-  }) : super(key: key);
-
-  final Widget child;
-  final Duration duration;
-  final double offset;
-  final Axis axis;
-
-  @override
-  Widget build(BuildContext context){
-    return TweenAnimationBuilder<double>(
-      child: child,
-      duration: duration,
-      curve: Curves.elasticOut,
-      tween : Tween(begin: 1, end: 0),
-      builder : ( context, value, child){
-        return Transform.translate(
-          offset: axis == Axis.horizontal
-            ? Offset(
-              value+offset,
-              0.0,
-              )
-            : Offset(
-              0.0,
-              value+offset,
-            ),
-        child: child,
-        );
-      },
-    );
+    int forfeit = truthOrDare();
+    if (forfeit == 1){
+      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Dare(name: name)));
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name, forfeit : forfeit)));
+    } else {
+      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Truth(name: name)));
+    }
   }
 }
