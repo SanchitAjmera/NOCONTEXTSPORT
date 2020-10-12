@@ -31,7 +31,6 @@ class _mainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = new List.generate(count, (int i) => new InputWidget(i));
     return Scaffold(
     //  resizeToAvoidBottomInset: false,
       body: Container(
@@ -44,22 +43,7 @@ class _mainPageState extends State<MainPage> {
         child: new Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-              Column (
-              // child: new ListView.builder(
-              //   itemCount: names.length,
-              //   itemBuilder: (BuildContext ctxt, int index) {
-              //     return new Column(
-              //       children: <Widget>[
-              //         new Text(
-              //           names[index],
-              //           style: TextStyle(fontSize: 25),
-              //           textAlign: TextAlign.center)
-              //       ],
-              //     );
-              //   }
-              // ),
-                children: children,
-              ),
+              
             Positioned(
               width: 300.0,
               height: 100.0,
@@ -156,17 +140,5 @@ class _mainPageState extends State<MainPage> {
     List<String> n2 = names;
     names = [];
     Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(names: n2)));
-  }
-}
-
-class InputWidget extends StatelessWidget {
-
-  final int index;
-
-  InputWidget(this.index);
-
-  @override
-  Widget build(BuildContext context) {
-    return new Text("InputWidget: " + index.toString());
   }
 }
