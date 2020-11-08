@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'mode_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,18 +12,69 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Schyler'),
-      home: MainPage(),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'dfasdfasdf'),
+      home: SplashPage(),
     );
   }
 }
 
-class MainPage extends StatefulWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  _splashPageState createState() => _splashPageState();
+}
+
+class StartPage extends StatefulWidget {
   @override
   _mainPageState createState() => _mainPageState();
 }
 
-class _mainPageState extends State<MainPage> {
+class _splashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(Duration(seconds: 2), () => navigateToMainPage(context));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //  resizeToAvoidBottomInset: false,
+        body: GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => navigateToMainPage(context),
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Colors.black.withOpacity(1),
+              Colors.black.withOpacity(1)
+            ])),
+        child: new Stack(alignment: Alignment.center, children: <Widget>[
+          Positioned(
+            width: 350.0,
+            height: 100.0,
+            //  top: 150,
+            child: Container(
+              child: Center(
+                child: new Image.asset('asset/image/logo1.jpg'),
+              ),
+            ),
+          ),
+        ]),
+      ),
+    ));
+  }
+
+  Future navigateToMainPage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => StartPage()));
+  }
+}
+
+class _mainPageState extends State<StartPage> {
   // collection of names inputed by player
   List<String> names = [];
   List<Widget> _listings = [];
@@ -28,29 +82,30 @@ class _mainPageState extends State<MainPage> {
   TextEditingController eCtrl = new TextEditingController();
   bool showDialog = false;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    //  resizeToAvoidBottomInset: false,
+      //  resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.pinkAccent[400].withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
-
+                colors: [
+              Colors.black.withOpacity(0.85),
+              Colors.black.withOpacity(0.85)
+            ])),
         child: new Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
-
             Positioned(
               width: 300.0,
               height: 100.0,
               top: 150,
-              child : Container(
+              child: Container(
                 child: Center(
-                  child: new Image.asset('asset/image/sportify.png'),
+                  child:
+                      Container(), //new Image.asset('asset/image/sportify.png'),
                 ),
               ),
             ),
@@ -65,7 +120,7 @@ class _mainPageState extends State<MainPage> {
                       left: 40,
                       right: 0,
                     ),
-                    //  title: new Text("Enter Name"),
+                    //  title: new Text("ENTER NAME"),
                     content: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -75,30 +130,31 @@ class _mainPageState extends State<MainPage> {
                           width: 180.0,
                           child: Center(
                             child: TextField(
-                              style: TextStyle(fontSize: 30),
-                          //    textAlign: TextAlign.center,
-                              controller: eCtrl,
-                              decoration: new InputDecoration.collapsed( hintText: "Enter Name"),
-                              maxLines: 1,
-                              onSubmitted: (String text){}
-                            ),
+                                style: TextStyle(fontSize: 30),
+                                //    textAlign: TextAlign.center,
+                                controller: eCtrl,
+                                decoration: new InputDecoration.collapsed(
+                                    hintText: "ENTER NAME"),
+                                maxLines: 1,
+                                onSubmitted: (String text) {}),
                           ),
                         ),
                         new Spacer(),
-    //                    new Spacer(),
+                        //                    new Spacer(),
                         Container(
                           width: 80.0,
-                          child: new FlatButton (
+                          child: new FlatButton(
                             onPressed: () {
                               setState(() {
-                                if (eCtrl.text != ""){
+                                if (eCtrl.text != "") {
                                   names.add(eCtrl.text);
-                                //  _listings.add(Text("hello"));
+                                  //  _listings.add(Text("hello"));
                                 }
                                 eCtrl.clear();
                               });
                             },
-                            child: new Icon(Icons.add_circle_outline, size: 40.0),
+                            child:
+                                new Icon(Icons.add_circle_outline, size: 40.0),
                           ),
                         ),
                       ],
@@ -113,19 +169,19 @@ class _mainPageState extends State<MainPage> {
               height: 70.0,
               child: Container(
                 child: FlatButton(
-                  color: Colors.grey[900],
-                  textColor: Colors. white,
+                  color: Colors.orange[600],
+                  textColor: Colors.black,
                   onPressed: () {
                     setState(() {
-                      if (eCtrl.text != ""){
+                      if (eCtrl.text != "") {
                         names.add(eCtrl.text);
-                        count = count +1;
+                        count = count + 1;
                       }
                       eCtrl.clear();
                       navigateToSubPage(context);
                     });
                   },
-                  child: const Text('Play', style: TextStyle(fontSize: 40)),
+                  child: const Text('PLAY', style: TextStyle(fontSize: 40)),
                 ),
               ),
             ),
@@ -133,7 +189,8 @@ class _mainPageState extends State<MainPage> {
               bottom: 10,
               child: Text(
                 "BY NOCONTEXTSPORT",
-                style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "sd"),
+                style: TextStyle(
+                    fontSize: 20, color: Colors.white, fontFamily: "sd"),
               ),
             ),
           ],
@@ -142,10 +199,10 @@ class _mainPageState extends State<MainPage> {
     );
   }
 
-
   Future navigateToSubPage(context) async {
     List<String> n2 = names;
     names = [];
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(names: n2)));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ModePage(names: n2)));
   }
 }

@@ -15,25 +15,26 @@ import 'truth.dart';
 import 'package:page_transition/page_transition.dart';
 
 class QuestionPage extends StatefulWidget {
-
   String name;
+  int option;
 
   //contructor enabling passing of name details
-  QuestionPage({Key key, @required this.name}) : super(key: key);
+  QuestionPage({Key key, @required this.name, @required this.option})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _QuestionPageState(name);
+    return _QuestionPageState(name, option);
   }
 }
 
 class _QuestionPageState extends State<QuestionPage>
     with SingleTickerProviderStateMixin {
-
   String name;
+  int option;
   Questions questions = new Questions();
-  List<int> ordering = null;
-  Map<String, bool> question = null;
+  List<int> ordering;
+  Map<String, bool> question;
   Color _colorContainer1 = Colors.white;
   Color _colorContainer2 = Colors.white;
   Color _colorContainer3 = Colors.white;
@@ -44,8 +45,9 @@ class _QuestionPageState extends State<QuestionPage>
 
   static int DELAY = 1;
 
-  _QuestionPageState(String name){
-    this.name  = name;
+  _QuestionPageState(String name, int option) {
+    this.name = name;
+    this.option = option;
   }
 
   @override
@@ -61,154 +63,148 @@ class _QuestionPageState extends State<QuestionPage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.pink.withOpacity(1), Colors.yellow.withOpacity(1)])),
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            Positioned(
-              width: 350,
-              height: 200,
-              top: 120,
-              child: Center(
-                  child: Text(
-                    "Okay " + name + ", " + getQuestion().keys.toList()[0],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 35, color: Colors.white),
-                  ),
-                ),
+                colors: [
+              Colors.black.withOpacity(0.85),
+              Colors.black.withOpacity(0.85)
+            ])),
+        child: Stack(alignment: Alignment.topCenter, children: <Widget>[
+          Positioned(
+            width: 350,
+            height: 200,
+            top: 120,
+            child: Center(
+              child: Text(
+                "Okay " + name + ", " + getQuestion().keys.toList()[0],
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 35, color: Colors.white),
+              ),
             ),
-            Positioned(
-              width: 400,
-              height: 120,
-              top: 320,
-              child: new AlertDialog(
-                contentPadding: EdgeInsets.all(0),
-                content: InkWell(
-                  child: Container(
-                    width: 400,
-                    color: _colorContainer1,
-                    child: Center(
-                      child: Text(
-                        getQuestion().keys.toList()[getOrdering()[0]],
+          ),
+          Positioned(
+            width: 400,
+            height: 120,
+            top: 320,
+            child: new AlertDialog(
+              contentPadding: EdgeInsets.all(0),
+              content: InkWell(
+                child: Container(
+                  width: 400,
+                  color: _colorContainer1,
+                  child: Center(
+                    child: Text(getQuestion().keys.toList()[getOrdering()[0]],
                         style: TextStyle(fontSize: 30, color: _colorText1),
-                        textAlign: TextAlign.center
-                      ),
-                    ),
+                        textAlign: TextAlign.center),
                   ),
-                  onTap: () {
-                    bool res = question.values.toList()[getOrdering()[0]];
-                    setState(() {
-                      _colorContainer1 = res ? Colors.green : Colors.red;
-                      _colorText1 = Colors.white;
-                    });
-                    if (res){
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        Navigator.pop(context);
-                      });
-                    } else {
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        navigateToTDPage(context);
-                      });
-                    }
-                  },
                 ),
+                onTap: () {
+                  bool res = question.values.toList()[getOrdering()[0]];
+                  setState(() {
+                    _colorContainer1 = res ? Colors.green : Colors.red;
+                    _colorText1 = Colors.white;
+                  });
+                  if (res) {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      Navigator.pop(context);
+                    });
+                  } else {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      navigateToTDPage(context);
+                    });
+                  }
+                },
               ),
             ),
-            Positioned(
-              width: 400,
-              height: 120,
-              top: 420,
-              child: new AlertDialog(
-                contentPadding: EdgeInsets.all(0),
-                content: InkWell(
-                  child: Container(
-                    width: 400,
-                    color: _colorContainer2,
-                    child: Center(
-                      child: Text(
-                        getQuestion().keys.toList()[getOrdering()[1]],
+          ),
+          Positioned(
+            width: 400,
+            height: 120,
+            top: 420,
+            child: new AlertDialog(
+              contentPadding: EdgeInsets.all(0),
+              content: InkWell(
+                child: Container(
+                  width: 400,
+                  color: _colorContainer2,
+                  child: Center(
+                    child: Text(getQuestion().keys.toList()[getOrdering()[1]],
                         style: TextStyle(fontSize: 30, color: _colorText2),
-                        textAlign: TextAlign.center
-                      ),
-                    ),
+                        textAlign: TextAlign.center),
                   ),
-                  onTap: () {
-                    bool res = question.values.toList()[getOrdering()[1]];
-                    setState(() {
-                      _colorContainer2 = res ? Colors.green : Colors.red;
-                      _colorText2 = Colors.white;
-                    });
-                    if (res){
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        Navigator.pop(context);
-                      });
-                    } else {
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        navigateToTDPage(context);
-                      });
-                    }
-                  },
                 ),
+                onTap: () {
+                  bool res = question.values.toList()[getOrdering()[1]];
+                  setState(() {
+                    _colorContainer2 = res ? Colors.green : Colors.red;
+                    _colorText2 = Colors.white;
+                  });
+                  if (res) {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      Navigator.pop(context);
+                    });
+                  } else {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      navigateToTDPage(context);
+                    });
+                  }
+                },
               ),
             ),
-            Positioned(
-              width: 400,
-              height: 120,
-              top: 520,
-              child: new AlertDialog(
-                contentPadding: EdgeInsets.all(0),
-                content: InkWell(
-                  child: Container(
-                    width: 400,
-                    color: _colorContainer3,
-                    child: Center(
-                      child: Text(
-                        getQuestion().keys.toList()[getOrdering()[2]],
+          ),
+          Positioned(
+            width: 400,
+            height: 120,
+            top: 520,
+            child: new AlertDialog(
+              contentPadding: EdgeInsets.all(0),
+              content: InkWell(
+                child: Container(
+                  width: 400,
+                  color: _colorContainer3,
+                  child: Center(
+                    child: Text(getQuestion().keys.toList()[getOrdering()[2]],
                         style: TextStyle(fontSize: 30, color: _colorText3),
-                        textAlign: TextAlign.center
-                      ),
-                    ),
+                        textAlign: TextAlign.center),
                   ),
-                  onTap: () {
-                    bool res = question.values.toList()[getOrdering()[2]];
-                    setState(() {
-                      _colorContainer3 = res ? Colors.green : Colors.red;
-                      _colorText3 = Colors.white;
-                    });
-                    if (res){
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        Navigator.pop(context);
-                      });
-                    } else {
-                      Future.delayed(Duration(seconds: DELAY), () {
-                        navigateToTDPage(context);
-                      });
-                    }
-                  },
                 ),
+                onTap: () {
+                  bool res = question.values.toList()[getOrdering()[2]];
+                  setState(() {
+                    _colorContainer3 = res ? Colors.green : Colors.red;
+                    _colorText3 = Colors.white;
+                  });
+                  if (res) {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      Navigator.pop(context);
+                    });
+                  } else {
+                    Future.delayed(Duration(seconds: DELAY), () {
+                      navigateToTDPage(context);
+                    });
+                  }
+                },
               ),
-            )
-          ]
-        ),
+            ),
+          )
+        ]),
       ),
     );
   }
 
-  Map<String, bool> getQuestion(){
-    if (question == null){
-      question = questions.getQuestion();
+  Map<String, bool> getQuestion() {
+    if (question == null) {
+      question = questions.getQuestion(option);
     }
     return question;
   }
 
-  List<int> getOrdering(){
-    if (ordering == null){
+  List<int> getOrdering() {
+    if (ordering == null) {
       ordering = questions.getOrdering();
     }
     return ordering;
   }
 
-  int truthOrDare(){
+  int truthOrDare() {
     return (Random().nextDouble()).round();
   }
 
@@ -218,11 +214,17 @@ class _QuestionPageState extends State<QuestionPage>
 
   Future navigateToTDPage(context) async {
     int forfeit = truthOrDare();
-    if (forfeit == 1){
-      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Dare(name: name)));
+    if (forfeit == 1) {
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.rightToLeft, child: Dare(name: name)));
       //Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name, forfeit : forfeit)));
     } else {
-      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Truth(name: name)));
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.rightToLeft, child: Truth(name: name)));
     }
   }
 }

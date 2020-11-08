@@ -5,75 +5,73 @@ import 'main.dart';
 import 'board_view.dart';
 import 'model.dart';
 
- 
 class Questions {
-
   String name;
 
-  List<Map<String, bool>> questions = [
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    },
-    {
-      'Which celebrity has Kim Kardashian said to have slept with in 2014' : true,
-      'Rafa Nadal' : true,
-      'Cristiano Ronaldo' : false,
-      'Sergio Ramos' : false,
-    }
+  List<List<Map<String, bool>>> questions = [
+    [
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+    ],
+    [
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+    ],
+    [
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+      {
+        'Which celebrity has Kim Kardashian said to have slept with in 2014':
+            true,
+        'Rafa Nadal': true,
+        'Cristiano Ronaldo': false,
+        'Sergio Ramos': false,
+      },
+    ]
   ];
 
   Questions({Key key});
 
-  Map<String, bool> getQuestion(){
-    var _random = (Random().nextDouble() * questions.length).floor();
-    return questions[_random];
+  Map<String, bool> getQuestion(int option) {
+    var _random = (Random().nextDouble() * questions[0].length).floor();
+    return questions[option][_random];
   }
 
-  List<int> getOrdering(){
-    List<int> outcomes = [1,2,3];
+  List<int> getOrdering() {
+    List<int> outcomes = [1, 2, 3];
     List<int> randInt = [];
-    while(outcomes.length > 1){
+    while (outcomes.length > 1) {
       var _random = (Random().nextDouble() * 3).round() + 1;
-      if (outcomes.contains(_random)){
+      if (outcomes.contains(_random)) {
         randInt.add(_random);
         outcomes.remove(_random);
       }

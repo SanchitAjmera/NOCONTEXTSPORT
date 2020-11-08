@@ -13,9 +13,7 @@ import 'TD.dart';
 import 'TD_page.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class Truth extends StatefulWidget {
-
   String name;
 
   //contructor enabling passing of name details
@@ -27,21 +25,19 @@ class Truth extends StatefulWidget {
   }
 }
 
-class _TruthState extends State<Truth>
-    with SingleTickerProviderStateMixin {
-
+class _TruthState extends State<Truth> with SingleTickerProviderStateMixin {
   String name;
   Color _colorContainer1 = Colors.white;
 
-  _TruthState(String name){
-    this.name  = name;
+  _TruthState(String name) {
+    this.name = name;
   }
 
   @override
   void initState() {
     super.initState();
+    Timer(Duration(seconds: 1), () => navigateToTDPage(context));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +47,13 @@ class _TruthState extends State<Truth>
         onTap: () => navigateToTDPage(context),
         child: new Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.green.withOpacity(1), Colors.green.withOpacity(1)])),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.green.withOpacity(1),
+                Colors.green.withOpacity(1)
+              ])),
           child: Center(
             child: Text(
               "Truth!",
@@ -67,8 +66,10 @@ class _TruthState extends State<Truth>
   }
 
   Future navigateToTDPage(context) async {
-      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: TDPage(name: name, forfeit: 0)));
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name, forfeit : forfeit)));
-  //  print(forfeit);
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.rightToLeft,
+            child: TDPage(name: name, forfeit: 0)));
   }
 }

@@ -13,9 +13,7 @@ import 'TD.dart';
 import 'TD_page.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class Dare extends StatefulWidget {
-
   String name;
 
   //contructor enabling passing of name details
@@ -27,21 +25,19 @@ class Dare extends StatefulWidget {
   }
 }
 
-class _DareState extends State<Dare>
-    with SingleTickerProviderStateMixin {
-
+class _DareState extends State<Dare> with SingleTickerProviderStateMixin {
   String name;
   Color _colorContainer1 = Colors.white;
 
-  _DareState(String name){
-    this.name  = name;
+  _DareState(String name) {
+    this.name = name;
   }
 
   @override
   void initState() {
     super.initState();
+    Timer(Duration(seconds: 1), () => navigateToTDPage(context));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +47,13 @@ class _DareState extends State<Dare>
         onTap: () => navigateToTDPage(context),
         child: new Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.red.withOpacity(1), Colors.red.withOpacity(1)])),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Colors.red.withOpacity(1),
+                Colors.red.withOpacity(1)
+              ])),
           child: Center(
             child: Text(
               "Dare!",
@@ -67,8 +66,10 @@ class _DareState extends State<Dare>
   }
 
   Future navigateToTDPage(context) async {
-      Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: TDPage(name: name, forfeit: 1)));
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name, forfeit : forfeit)));
-  //  print(forfeit);
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.rightToLeft,
+            child: TDPage(name: name, forfeit: 1)));
   }
 }

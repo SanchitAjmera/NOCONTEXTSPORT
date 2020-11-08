@@ -7,15 +7,16 @@ import 'model.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
-
   List<String> names;
+  int option;
 
   //contructor enabling passing of name details
-  HomePage({Key key, @required this.names}) : super(key: key);
+  HomePage({Key key, @required this.names, @required this.option})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _HomePageState(names: names);
+    return _HomePageState(names: names, option: option);
   }
 }
 
@@ -23,13 +24,22 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   double _angle = 0;
   double _current = 0;
+  var _value;
   AnimationController _ctrl;
   Animation _ani;
-  List<Luck> _items = [];
-  var _value;
-  List<String> names;
   String name;
-  _HomePageState({Key key, @required this.names});
+  int option;
+
+  List<Luck> _items = [];
+  List<String> names;
+  List<Color> optionColours = <Color>[
+    Colors.black.withOpacity(0.85),
+    Colors.black.withOpacity(0.85),
+    Colors.black.withOpacity(0.85),
+    Colors.black.withOpacity(0.85)
+  ];
+
+  _HomePageState({Key key, @required this.names, @required this.option});
 
   @override
   void initState() {
@@ -41,10 +51,9 @@ class _HomePageState extends State<HomePage>
     _ani = CurvedAnimation(parent: _ctrl, curve: Curves.fastLinearToSlowEaseIn);
 
     int accent = 0;
-    for (String name in names){
+    for (String name in names) {
       _items.add(Luck(name, Colors.accents[accent]));
       accent += 2;
-
     }
   }
 
@@ -56,7 +65,7 @@ class _HomePageState extends State<HomePage>
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.yellow.withOpacity(0.8), Colors.deepOrangeAccent[400].withOpacity(0.7)])),
+                colors: [optionColours[option], optionColours[option]])),
         child: AnimatedBuilder(
             animation: _ani,
             builder: (context, child) {
@@ -74,9 +83,12 @@ class _HomePageState extends State<HomePage>
                   Positioned(
                     top: 60,
                     child: new Text(
-                      "NOCONTEXTSPORT",
+                      "",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                   ),
                 ],
@@ -106,7 +118,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-_animation() {
+  _animation() {
     if (!_ctrl.isAnimating) {
       var _random = Random().nextDouble();
       _angle = 20 + Random().nextInt(5) + _random;
@@ -114,14 +126,13 @@ _animation() {
         _current = (_current + _random);
         _current = _current - _current ~/ 1;
         _ctrl.reset();
-      //  print("stopped animating");
+        //  print("stopped animating");
         var _index = _calIndex(_value * _angle + _current);
         // this.name =  _items[_index].asset;
         navigateToHomePage(context);
-      //  print("done popup");
+        //  print("done popup");
       });
     }
-
   }
 
   int _calIndex(value) {
@@ -129,6 +140,7 @@ _animation() {
     var _base = (2 * pi / _items.length / 2) / (2 * pi);
     return (((_base + value) % 1) * _items.length).floor();
   }
+
   // function which outputs results at the bottom of the screen
   _buildResult(_value) {
     var _index = _calIndex(_value * _angle + _current);
@@ -138,18 +150,24 @@ _animation() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 70.0),
       child: Align(
-        alignment: Alignment.bottomCenter,
-        child: new Text(
-          _asset,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold, color: Colors.white),
-        )//Image.asset(_asset, height: 80, width: 80),
-      ),
+          alignment: Alignment.bottomCenter,
+          child: new Text(
+            _asset,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+          ) //Image.asset(_asset, height: 80, width: 80),
+          ),
     );
   }
 
   Future navigateToHomePage(context) async {
     var _index = _calIndex(_value * _angle + _current);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(name: name)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => QuestionPage(name: name, option: option)));
   }
 }
