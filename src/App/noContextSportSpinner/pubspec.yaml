@@ -65,7 +65,7 @@ flutter:
   fonts:
     - family: Schyler
       fonts:
-        - asset: asset/fonts/RoundyRainbows.otf
+        - asset: asset/fonts/TrickyJimmy.ttf
           style: italic
 
   #

@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+
 import 'mode_page.dart';
 
 void main() => runApp(MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'dfasdfasdf'),
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Schyler'),
       home: SplashPage(),
     );
   }
@@ -33,7 +35,12 @@ class _splashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 2), () => navigateToMainPage(context));
+    Timer(Duration(seconds: 2), () => navigateToWarningPage(context));
+  }
+
+  Future navigateToWarningPage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => WarningPage()));
   }
 
   @override
@@ -42,7 +49,6 @@ class _splashPageState extends State<SplashPage> {
         //  resizeToAvoidBottomInset: false,
         body: GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => navigateToMainPage(context),
       child: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -67,11 +73,6 @@ class _splashPageState extends State<SplashPage> {
       ),
     ));
   }
-
-  Future navigateToMainPage(context) async {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => StartPage()));
-  }
 }
 
 class _mainPageState extends State<StartPage> {
@@ -83,7 +84,14 @@ class _mainPageState extends State<StartPage> {
   bool showDialog = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //Future.delayed(Duration.zero, () => drinkingAgreement(context));
     return Scaffold(
       //  resizeToAvoidBottomInset: false,
       body: Container(
@@ -204,5 +212,74 @@ class _mainPageState extends State<StartPage> {
     names = [];
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => ModePage(names: n2)));
+  }
+}
+
+class WarningPage extends StatefulWidget {
+  @override
+  _warningPageState createState() => _warningPageState();
+}
+
+class _warningPageState extends State<WarningPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //  resizeToAvoidBottomInset: false,
+        body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => navigateToMainPage(context),
+            child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                      Colors.black.withOpacity(1),
+                      Colors.black.withOpacity(1)
+                    ])),
+                child:
+                    new Stack(alignment: Alignment.center, children: <Widget>[
+                  Positioned(
+                    // width: 350.0,
+                    // height: 100.0,
+                    //  top: 150,
+                    child: Container(
+                      padding: EdgeInsets.all(60),
+                      child: Center(
+                        child: new Text(
+                          "Your drinking is your own responsibility",
+                          style: TextStyle(color: Colors.white, fontSize: 50),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    // width: 350.0,
+                    // height: 100.0,
+                    bottom: 50,
+                    child: Container(
+                      padding: EdgeInsets.all(50),
+                      child: Center(
+                        child: new Text(
+                          "Tap To Agree",
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]))));
+  }
+
+  Future navigateToMainPage(context) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => StartPage()));
   }
 }
