@@ -25,7 +25,7 @@ class ModePage extends StatefulWidget {
 
 class _ModePageState extends State<ModePage> {
   List<String> names;
-  List<double> positions = [50, 210, 370, 530];
+  List<double> positions = [50, 195, 340, 490];
   List<Color> optionColors = <Color>[
     Colors.white,
     Colors.white,
@@ -65,9 +65,10 @@ class _ModePageState extends State<ModePage> {
   Widget setOption(int option) {
     return Positioned(
       width: 350.0,
-      height: 120.0,
+      height: 170.0,
       top: positions[option],
       child: Container(
+        margin: const EdgeInsets.all(30),
         child: RaisedButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

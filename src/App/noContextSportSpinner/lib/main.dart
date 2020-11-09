@@ -108,12 +108,19 @@ class _mainPageState extends State<StartPage> {
           children: <Widget>[
             Positioned(
               width: 300.0,
-              height: 100.0,
-              top: 150,
+              height: 235.0,
+              top: 50,
               child: Container(
-                child: Center(
-                  child:
-                      Container(), //new Image.asset('asset/image/sportify.png'),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Wrap(
+                        children: [
+                          for (var i in names) showName(i),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -203,6 +210,26 @@ class _mainPageState extends State<StartPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget showName(String name) {
+    return new Container(
+      decoration: new BoxDecoration(
+          color: Colors.grey,
+          borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(40.0),
+            topRight: const Radius.circular(40.0),
+            bottomLeft: const Radius.circular(40.0),
+            bottomRight: const Radius.circular(40.0),
+          )),
+      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(5),
+      height: 50,
+      child: Text(
+        name,
+        style: TextStyle(fontSize: 30),
       ),
     );
   }
