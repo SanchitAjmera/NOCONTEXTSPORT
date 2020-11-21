@@ -15,7 +15,7 @@ class BoardView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _BoardViewState(number : items.length);
+    return _BoardViewState(number: items.length);
   }
 }
 
@@ -92,10 +92,12 @@ class _BoardViewState extends State<BoardView> {
         child: ConstrainedBox(
           constraints:
               BoxConstraints.expand(height: size.height / 3, width: 100.0),
-          child: new Text(luck.asset,
+          child: new Text(
+            luck.asset.toUpperCase(),
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, height : 2.0),
-          ),// Image.asset(luck.asset),
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, height: 2.0),
+          ), // Image.asset(luck.asset),
         ),
       ),
     );

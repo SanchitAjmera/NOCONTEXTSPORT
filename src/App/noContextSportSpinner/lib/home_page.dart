@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
           width: 110,
           child: Text(
             "SPIN",
-            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
           ),
         ),
         onTap: _animation,
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage>
       child: Align(
           alignment: Alignment.bottomCenter,
           child: new Text(
-            _asset,
+            _asset.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 50.0,

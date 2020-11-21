@@ -206,7 +206,7 @@ class _mainPageState extends State<StartPage> {
                   child: FlatButton(
                     color: Colors.orange,
                     textColor: Colors.black,
-                    onPressed: () {
+                    onPressed: () async {
                       setState(() {
                         if (eCtrl.text != "") {
                           names.add(eCtrl.text);
@@ -236,7 +236,6 @@ class _mainPageState extends State<StartPage> {
   }
 
   Widget showName(String name) {
-    double offset = name.length * 5.1;
     return new Container(
       decoration: new BoxDecoration(
           color: Colors.grey,
