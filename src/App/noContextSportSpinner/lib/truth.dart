@@ -33,6 +33,12 @@ class _TruthState extends State<Truth> with SingleTickerProviderStateMixin {
     this.name = name;
   }
 
+  double width;
+  double height;
+  double fontSize;
+  double boxSize;
+  double sizeRatio = 0.70;
+
   @override
   void initState() {
     super.initState();
@@ -41,24 +47,23 @@ class _TruthState extends State<Truth> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => navigateToTDPage(context),
-        child: new Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Colors.green.withOpacity(1),
-                Colors.green.withOpacity(1)
-              ])),
-          child: Center(
-            child: Text(
-              "Truth!",
-              style: TextStyle(fontSize: 70.0, color: Colors.white),
-            ),
+      body: new Container(
+        width: width,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Colors.green.withOpacity(1),
+              Colors.green.withOpacity(1)
+            ])),
+        child: Center(
+          child: Text(
+            "Truth!",
+            style: TextStyle(fontSize: width / 4, color: Colors.white),
           ),
         ),
       ),

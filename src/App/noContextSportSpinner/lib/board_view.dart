@@ -29,8 +29,11 @@ class _BoardViewState extends State<BoardView> {
 
   _BoardViewState({Key key, @required this.number});
 
+  double width;
+
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -82,6 +85,7 @@ class _BoardViewState extends State<BoardView> {
   }
 
   _buildImage(Luck luck) {
+    double font_size = (width) / (number * 2 + (luck.asset.length));
     var _rotate = _rotote(widget.items.indexOf(luck));
     return Transform.rotate(
       angle: _rotate,
@@ -91,12 +95,12 @@ class _BoardViewState extends State<BoardView> {
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
           constraints:
-              BoxConstraints.expand(height: size.height / 3, width: 100.0),
+              BoxConstraints.expand(height: size.height / 3, width: width / 3),
           child: new Text(
             luck.asset.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, height: 2.0),
+                fontSize: font_size, fontWeight: FontWeight.bold, height: 2.0),
           ), // Image.asset(luck.asset),
         ),
       ),

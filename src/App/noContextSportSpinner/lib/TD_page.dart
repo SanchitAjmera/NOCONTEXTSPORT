@@ -11,14 +11,13 @@ import 'dart:io';
 import 'question_page.dart';
 import 'TD.dart';
 
-
 class TDPage extends StatefulWidget {
-
   String name;
   int forfeit;
 
   //contructor enabling passing of name details
-  TDPage({Key key, @required this.name, @required this.forfeit}) : super(key: key);
+  TDPage({Key key, @required this.name, @required this.forfeit})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -26,27 +25,28 @@ class TDPage extends StatefulWidget {
   }
 }
 
-class _TDPageState extends State<TDPage>
-    with SingleTickerProviderStateMixin {
-
-  _TDPageState(String name, int forfeit){
-    this.name  = name;
+class _TDPageState extends State<TDPage> with SingleTickerProviderStateMixin {
+  _TDPageState(String name, int forfeit) {
+    this.name = name;
     this.forfeit = forfeit;
   }
   String name;
   int forfeit;
   Color _colorContainer1 = Colors.white;
   Color _background;
-
+  double width;
+  double height;
+  double sizeRatio = 0.8;
 
   @override
   void initState() {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width * sizeRatio;
+    height = MediaQuery.of(context).size.height * sizeRatio;
     this._background = forfeit != 1 ? Colors.green : Colors.red;
     return Scaffold(
       body: GestureDetector(
@@ -54,18 +54,19 @@ class _TDPageState extends State<TDPage>
         onTap: () => navigateToSubPage(context),
         child: new Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [_background.withOpacity(1), _background.withOpacity(1)])),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                _background.withOpacity(1),
+                _background.withOpacity(1)
+              ])),
           child: Center(
             child: Container(
-              width: 350,
-              child: Text(
-                truthOrDare(),
-                style: TextStyle(fontSize: 40, color: Colors.white),
-                textAlign: TextAlign.center
-              ),
+              width: width,
+              child: Text(truthOrDare(),
+                  style: TextStyle(fontSize: width / 9, color: Colors.white),
+                  textAlign: TextAlign.center),
             ),
           ),
         ),
@@ -73,7 +74,7 @@ class _TDPageState extends State<TDPage>
     );
   }
 
-  String truthOrDare(){
+  String truthOrDare() {
     TD td = new TD();
     var _random = (Random().nextDouble() * 2).round() + 1;
     if (forfeit != 1) {
@@ -87,6 +88,5 @@ class _TDPageState extends State<TDPage>
     Navigator.pop(context);
     Navigator.pop(context);
     Navigator.pop(context);
-    //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(names: names)));
   }
 }

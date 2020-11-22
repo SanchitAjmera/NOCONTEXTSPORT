@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:collection';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'board_view.dart';
@@ -35,15 +36,24 @@ class _QuestionPageState extends State<QuestionPage>
   Questions questions = new Questions();
   List<int> ordering;
   Map<String, bool> question;
-  Color _colorContainer1 = Colors.white;
-  Color _colorContainer2 = Colors.white;
-  Color _colorContainer3 = Colors.white;
+  List<Color> _colorContainer = <Color>[
+    Colors.white,
+    Colors.white,
+    Colors.white,
+  ];
 
-  Color _colorText1 = Colors.black;
-  Color _colorText2 = Colors.black;
-  Color _colorText3 = Colors.black;
-
+  List<Color> _colorText = <Color>[
+    Colors.black,
+    Colors.black,
+    Colors.black,
+  ];
   static int DELAY = 1;
+
+  double width;
+  double height;
+  double fontSize;
+  double boxSize;
+  double sizeRatio = 0.75;
 
   _QuestionPageState(String name, int option) {
     this.name = name;
@@ -57,6 +67,9 @@ class _QuestionPageState extends State<QuestionPage>
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width * sizeRatio;
+    height = MediaQuery.of(context).size.height * sizeRatio;
+    boxSize = height / 6;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -69,123 +82,63 @@ class _QuestionPageState extends State<QuestionPage>
             ])),
         child: Stack(alignment: Alignment.topCenter, children: <Widget>[
           Positioned(
-            width: 350,
-            height: 200,
-            top: 120,
+            width: width,
+            height: height / 2,
+            top: height / 8,
             child: Center(
               child: Text(
                 "Okay " + name + ", " + getQuestion().keys.toList()[0],
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 35, color: Colors.white),
+                style: TextStyle(fontSize: width / 10, color: Colors.white),
               ),
             ),
           ),
-          Positioned(
-            width: 400,
-            height: 120,
-            top: 320,
-            child: new AlertDialog(
-              contentPadding: EdgeInsets.all(0),
-              content: InkWell(
-                child: Container(
-                  width: 400,
-                  color: _colorContainer1,
-                  child: Center(
-                    child: Text(getQuestion().keys.toList()[getOrdering()[0]],
-                        style: TextStyle(fontSize: 30, color: _colorText1),
-                        textAlign: TextAlign.center),
-                  ),
-                ),
-                onTap: () {
-                  bool res = question.values.toList()[getOrdering()[0]];
-                  setState(() {
-                    _colorContainer1 = res ? Colors.green : Colors.red;
-                    _colorText1 = Colors.white;
-                  });
-                  if (res) {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      Navigator.pop(context);
-                    });
-                  } else {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      navigateToTDPage(context);
-                    });
-                  }
-                },
-              ),
-            ),
-          ),
-          Positioned(
-            width: 400,
-            height: 120,
-            top: 420,
-            child: new AlertDialog(
-              contentPadding: EdgeInsets.all(0),
-              content: InkWell(
-                child: Container(
-                  width: 400,
-                  color: _colorContainer2,
-                  child: Center(
-                    child: Text(getQuestion().keys.toList()[getOrdering()[1]],
-                        style: TextStyle(fontSize: 30, color: _colorText2),
-                        textAlign: TextAlign.center),
-                  ),
-                ),
-                onTap: () {
-                  bool res = question.values.toList()[getOrdering()[1]];
-                  setState(() {
-                    _colorContainer2 = res ? Colors.green : Colors.red;
-                    _colorText2 = Colors.white;
-                  });
-                  if (res) {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      Navigator.pop(context);
-                    });
-                  } else {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      navigateToTDPage(context);
-                    });
-                  }
-                },
-              ),
-            ),
-          ),
-          Positioned(
-            width: 400,
-            height: 120,
-            top: 520,
-            child: new AlertDialog(
-              contentPadding: EdgeInsets.all(0),
-              content: InkWell(
-                child: Container(
-                  width: 400,
-                  color: _colorContainer3,
-                  child: Center(
-                    child: Text(getQuestion().keys.toList()[getOrdering()[2]],
-                        style: TextStyle(fontSize: 30, color: _colorText3),
-                        textAlign: TextAlign.center),
-                  ),
-                ),
-                onTap: () {
-                  bool res = question.values.toList()[getOrdering()[2]];
-                  setState(() {
-                    _colorContainer3 = res ? Colors.green : Colors.red;
-                    _colorText3 = Colors.white;
-                  });
-                  if (res) {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      Navigator.pop(context);
-                    });
-                  } else {
-                    Future.delayed(Duration(seconds: DELAY), () {
-                      navigateToTDPage(context);
-                    });
-                  }
-                },
-              ),
-            ),
-          )
+          showQuestion(0),
+          showQuestion(1),
+          showQuestion(2),
         ]),
+      ),
+    );
+  }
+
+  Widget showQuestion(int n) {
+    return Positioned(
+      width: width,
+      height: boxSize,
+      top: ((height / 2) - 15) + (n + 1) * (boxSize + 15),
+      child: InkWell(
+        child: Container(
+          decoration: new BoxDecoration(
+            borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+            color: _colorContainer[n],
+          ),
+          width: width,
+          child: Center(
+            child: Text(getQuestion().keys.toList()[getOrdering()[n]],
+                style: TextStyle(
+                    fontSize: width /
+                        (getQuestion().keys.toList()[getOrdering()[n]].length *
+                            0.7),
+                    color: _colorText[n]),
+                textAlign: TextAlign.center),
+          ),
+        ),
+        onTap: () {
+          bool res = question.values.toList()[getOrdering()[n]];
+          setState(() {
+            _colorContainer[n] = res ? Colors.green : Colors.red;
+            _colorText[n] = Colors.white;
+          });
+          if (res) {
+            Future.delayed(Duration(seconds: DELAY), () {
+              Navigator.pop(context);
+            });
+          } else {
+            Future.delayed(Duration(seconds: DELAY), () {
+              navigateToTDPage(context);
+            });
+          }
+        },
       ),
     );
   }

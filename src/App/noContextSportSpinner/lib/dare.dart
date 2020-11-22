@@ -28,6 +28,8 @@ class Dare extends StatefulWidget {
 class _DareState extends State<Dare> with SingleTickerProviderStateMixin {
   String name;
   Color _colorContainer1 = Colors.white;
+  double width;
+  double height;
 
   _DareState(String name) {
     this.name = name;
@@ -41,24 +43,23 @@ class _DareState extends State<Dare> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => navigateToTDPage(context),
-        child: new Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Colors.red.withOpacity(1),
-                Colors.red.withOpacity(1)
-              ])),
-          child: Center(
-            child: Text(
-              "Dare!",
-              style: TextStyle(fontSize: 70.0, color: Colors.white),
-            ),
+      body: new Container(
+        width: width,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Colors.red.withOpacity(1),
+              Colors.red.withOpacity(1)
+            ])),
+        child: Center(
+          child: Text(
+            "Dare!",
+            style: TextStyle(fontSize: width / 4, color: Colors.white),
           ),
         ),
       ),

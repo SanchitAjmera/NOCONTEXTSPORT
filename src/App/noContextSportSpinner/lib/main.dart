@@ -62,7 +62,7 @@ class _splashPageState extends State<SplashPage> {
         child: new Stack(alignment: Alignment.center, children: <Widget>[
           Positioned(
             width: width, //350.0,
-            top: (height / 2),
+            top: (height / 1.8),
             child: Container(
               child: Center(
                 child: new Image.asset('asset/image/logo1.jpg'),
@@ -304,7 +304,7 @@ class _warningPageState extends State<WarningPage> {
                   Positioned(
                     width: width,
                     // height: 100.0,
-                    //  top: 150,
+                    top: height / 2.3,
                     child: Container(
                       padding: EdgeInsets.all(0),
                       child: Center(
