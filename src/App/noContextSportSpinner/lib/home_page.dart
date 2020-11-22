@@ -38,6 +38,11 @@ class _HomePageState extends State<HomePage>
     Colors.black.withOpacity(0.85),
     Colors.black.withOpacity(0.85)
   ];
+  double width;
+  double height;
+  double fontSize;
+  double boxSize;
+  double sizeRatio = 0.70;
 
   _HomePageState({Key key, @required this.names, @required this.option});
 
@@ -59,6 +64,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -80,17 +87,6 @@ class _HomePageState extends State<HomePage>
                   BoardView(items: _items, current: _current, angle: _angle),
                   _buildGo(),
                   _buildResult(_value),
-                  Positioned(
-                    top: 60,
-                    child: new Text(
-                      "",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
                 ],
               );
             }),
@@ -106,11 +102,12 @@ class _HomePageState extends State<HomePage>
         customBorder: CircleBorder(),
         child: Container(
           alignment: Alignment.center,
-          height: 110,
-          width: 110,
+          height: height / 6,
+          width: height / 6,
           child: Text(
             "SPIN",
-            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
+            style:
+                TextStyle(fontSize: height / 17, fontWeight: FontWeight.bold),
           ),
         ),
         onTap: _animation,
@@ -126,11 +123,8 @@ class _HomePageState extends State<HomePage>
         _current = (_current + _random);
         _current = _current - _current ~/ 1;
         _ctrl.reset();
-        //  print("stopped animating");
         var _index = _calIndex(_value * _angle + _current);
-        // this.name =  _items[_index].asset;
         navigateToHomePage(context);
-        //  print("done popup");
       });
     }
   }
@@ -155,7 +149,7 @@ class _HomePageState extends State<HomePage>
             _asset.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 50.0,
+                fontSize: height / 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ) //Image.asset(_asset, height: 80, width: 80),
