@@ -47,7 +47,7 @@ class _TDPageState extends State<TDPage> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width * sizeRatio;
     height = MediaQuery.of(context).size.height * sizeRatio;
-    this._background = forfeit != 1 ? Colors.green : Colors.red;
+    this._background = forfeit != 1 ? Colors.blue : Colors.red;
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,

@@ -18,9 +18,9 @@ class ArrowView extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.black12, Colors.black])),
-              height: 40,
-              width: 40,
+                      colors: [Colors.black, Colors.black])),
+              height: 30,
+              width: 30,
             ),
           ),
         ),

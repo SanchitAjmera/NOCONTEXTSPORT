@@ -78,14 +78,14 @@ class _BoardViewState extends State<BoardView> {
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [luck.color, luck.color.withOpacity(0)])),
+                  colors: [luck.color, luck.color])),
         ),
       ),
     );
   }
 
   _buildImage(Luck luck) {
-    double font_size = (width) / (number * 2 + (luck.asset.length));
+    double font_size = (width) / (number * 2 + (luck.asset.length * 1.5));
     var _rotate = _rotote(widget.items.indexOf(luck));
     return Transform.rotate(
       angle: _rotate,
@@ -97,7 +97,7 @@ class _BoardViewState extends State<BoardView> {
           constraints:
               BoxConstraints.expand(height: size.height / 3, width: width / 3),
           child: new Text(
-            luck.asset.toUpperCase(),
+            luck.asset[0].toUpperCase() + luck.asset.substring(1),
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: font_size, fontWeight: FontWeight.bold, height: 2.0),

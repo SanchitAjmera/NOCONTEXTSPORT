@@ -69,10 +69,12 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [optionColours[option], optionColours[option]])),
+            image: DecorationImage(
+                image: AssetImage("asset/image/sbg1.png"), fit: BoxFit.cover)),
+        // gradient: LinearGradient(
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     colors: [optionColours[option], optionColours[option]])),
         child: AnimatedBuilder(
             animation: _ani,
             builder: (context, child) {

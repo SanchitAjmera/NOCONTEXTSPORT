@@ -23,17 +23,17 @@ class _ModePageState extends State<ModePage> {
     Colors.white
   ];
   List<String> options = [
-    "FAM FUN",
-    "ON THE SESH",
-    "ICE BREAKER",
-    "PILLOW TALK"
+    "FAMILY FUN",
+    "FOR THE LADS",
+    "BREAK THE ICE",
+    "ADULTS ONLY"
   ];
   List<String> emojis = ["apple.png", "carrot.png", "cheese.png", "grapes.png"];
   List<String> desc = [
-    "Normal game family friendly dw",
-    "Perfect for when out wiv the lads",
-    "On a date? Lets break the ice",
-    "Spice it up in the bedroom ;)"
+    "A great way to bring life back into your boring family events!",
+    "The perfect game to play at pre drinks or down the pub with your mates!",
+    "The ideal way to settle into a date or for a fun night in with your other half!",
+    "The ultimate party game where anything can happen!"
   ];
   int option;
   double width;
@@ -108,7 +108,7 @@ class _ModePageState extends State<ModePage> {
                     ),
                     Text(
                       desc[option],
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 11),
                     )
                   ]),
                   padding: EdgeInsets.only(left: (width / 30)),

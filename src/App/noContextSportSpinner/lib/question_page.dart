@@ -171,7 +171,7 @@ class _QuestionPageState extends State<QuestionPage>
       Navigator.push(
           context,
           PageTransition(
-              type: PageTransitionType.rightToLeft, child: Dare(name: name)));
+              type: PageTransitionType.leftToRight, child: Dare(name: name)));
       //Navigator.push(context, MaterialPageRoute(builder: (context) => TDPage(name: name, forfeit : forfeit)));
     } else {
       Navigator.push(

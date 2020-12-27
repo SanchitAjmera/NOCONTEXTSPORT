@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'mode_page.dart';
 
@@ -259,7 +260,9 @@ class _mainPageState extends State<StartPage> {
     List<String> n2 = names;
     names = [];
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ModePage(names: n2)));
+        context,
+        PageTransition(
+            child: ModePage(names: n2), type: PageTransitionType.leftToRight));
   }
 }
 
@@ -336,6 +339,8 @@ class _warningPageState extends State<WarningPage> {
 
   Future navigateToMainPage(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => StartPage()));
+        context,
+        PageTransition(
+            child: StartPage(), type: PageTransitionType.leftToRight));
   }
 }

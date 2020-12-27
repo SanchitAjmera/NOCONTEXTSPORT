@@ -70,7 +70,7 @@ class _DareState extends State<Dare> with SingleTickerProviderStateMixin {
     Navigator.push(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft,
+            type: PageTransitionType.leftToRight,
             child: TDPage(name: name, forfeit: 1)));
   }
 }

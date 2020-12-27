@@ -57,8 +57,8 @@ class _TruthState extends State<Truth> with SingleTickerProviderStateMixin {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Colors.green.withOpacity(1),
-              Colors.green.withOpacity(1)
+              Colors.blue.withOpacity(1),
+              Colors.blue.withOpacity(1)
             ])),
         child: Center(
           child: Text(
