@@ -1,2 +1,2 @@
-# nocontextsport_App
-Implementation of a drinking gaming app for the nocontextsport instagram page
+# NOCONTEXTSPORT
+A drinking game app for the nocontextsport instagram page implemented using Flutter
